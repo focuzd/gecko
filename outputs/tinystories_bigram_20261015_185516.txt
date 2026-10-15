@@ -1,0 +1,7 @@
+weights: tinystories_bigram.pt (bigram, 3000 steps)
+prompt: 'Once upon a time', temperature: 0.8, top_k: None, seed: 1
+
+===== story 1 =====
+Once upon a timed She we She tom frithe t. thellasheiapy Sase wanam s hen f the ang ay The Til thed med bery t ay d s and e he, ackis arrere wentryo! bune sa the and he bisers t'sa d Ticly torin. to aro " ton t!"Hex?"Yo ged tll s ge Tho inthad alourmed t be le her ang he "Lind way wea bil and a Jo wa mooun aso atou
+[hit the 300 token limit]
+

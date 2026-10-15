@@ -1,0 +1,18 @@
+weights: tinystories_gpt.pt (gpt, 5000 steps)
+prompt: 'Once upon a time', temperature: 0.8, top_k: None, seed: 42
+
+===== story 1 =====
+Once upon a time, there was a little girl named Lily. She had a big stuff in her room. She was very good at help people.
+One day, Lily went to the park with her mom. They saw a small duck and a small bird. The bird had a shiny bird. Lily wanted to play with it too. She went to the bird and lay down all night.
+At the park, Lily saw the shiny bird flying in the sky. She saw her mom was sorry and said, "Why are you sad, Lily?" Lily said, "I want to play with you, but it is very important to play with you."
+Lily thought about it and said, "I want to play with my bird. It is mine, but I was too dry." She put the bird on her hand and picked it up and read it to her mom.
+Lily put the bird in her room and said, "Let's play with the bird." They tried to have one, but it was still angry, but it was not a mine.
+Lily started to shake her toe. She had never seen a big bird. They were friends. They played together all day long. They all ate the bird and had a lot of fun.
+The mine was happy to see the mine. It took the bird to a new friend and a warm very high. The driver was trying to play with the bird again and help each other. And from that day on, the bird could sweet in the mine forest and the bird became friends and played together every day.
+
+
+===== story 2 =====
+Once upon a time, there was a fox who lived in a big house. He had a small hut his favorite toy, a red ball. The ball loved to play with the ball all day. One day, the ball met a little boy named Tim. Tim had a ship on his face. He wanted to show his mom how to his mom.
+Tim's mom said, "Little boy, why are you smart?" Tim said, "I like to play with you. It is so much fun!" Tim smiled and said, "Sorry, Tim. They are my friend Tim. You are a good friend." They hoped the sun was good at the park.
+
+
