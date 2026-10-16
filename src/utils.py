@@ -4,6 +4,7 @@ import torch
 
 from bigram import BigramLanguageModel
 from gpt import GPTLanguageModel
+from mlp import MLPLanguageModel
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
@@ -13,6 +14,7 @@ OUTPUT_DIR = ROOT / "outputs"
 
 MODELS = {
     "bigram": BigramLanguageModel,
+    "mlp": MLPLanguageModel,
     "gpt": GPTLanguageModel,
 }
 

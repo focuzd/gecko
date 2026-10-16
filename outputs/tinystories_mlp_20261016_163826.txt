@@ -1,0 +1,12 @@
+weights: tinystories_mlp.pt (mlp, 10000 steps)
+prompt: 'Once upon a time', temperature: 0.8, top_k: None, seed: 42
+
+===== story 1 =====
+Once upon a time, a little girl named Lucy went in the slide bird. I'm sorry was very happy. Lily saw a mough and played by the warrown winter to have my played with the new friend, Tom. Leo they for her sonewhat she said. They were scaring was angry met a bird. The bird dropped every day and saw tpok Bobo and wanted to see bird so Togeting hear food to the cat and him fortive the rememberch. At the magic path and he rearned to help. The cat was stuck them together rest, there a nack was too shat it is mour pink outside, but the small dog named Mia. Mia took her book, an is mine on a tree. The cat was the fluif and a long near the she learned how to do something and was curious, but he needed to get on the small boll. The heard a set ongary new he play with the the flowers. They lef a nandle, he had house
+[hit the 800 token limit]
+
+===== story 2 =====
+Once upon a time, there was a big, hear apromals look for help. She had so much fun!
+After deach my bear home and at she was sad to set the twouts. He hugged his time. She looked at her house. They hud many friend, Tom. I'll ask said and have fun. They see in the small gave toys and stop at is friend. He wanted to play with her friend, the bird alay to seat he shouth. It was a big, were brue and said, "You can spered what will gave the show her mom said, "You are no be said where best friends again.
+
+

@@ -8,12 +8,15 @@ from utils import CHECKPOINT_DIR, MODELS, WEIGHTS_DIR, get_device, save_checkpoi
 TRAIN_CONFIG = {
     "bigram": dict(batch_size=32, block_size=8, max_iters=3000, eval_interval=300,
                    learning_rate=1e-2, eval_iters=200),
+    "mlp": dict(batch_size=64, block_size=32, max_iters=10000, eval_interval=1000,
+                learning_rate=1e-3, eval_iters=200),
     "gpt": dict(batch_size=64, block_size=256, max_iters=5000, eval_interval=500,
                 learning_rate=3e-4, eval_iters=200),
 }
 
 MODEL_CONFIG = {
     "bigram": dict(),
+    "mlp": dict(n_embd=24, n_hidden=512),
     "gpt": dict(n_embd=384, n_head=6, n_layer=6, dropout=0.2),
 }
 
@@ -47,7 +50,7 @@ def train(dataset, model_name):
     print(f"vocab size {len(tok)}, train tokens {len(train_data):,}, val tokens {len(val_data):,}")
 
     model_args = dict(vocab_size=len(tok), **MODEL_CONFIG[model_name])
-    if model_name == "gpt":
+    if model_name != "bigram":
         model_args["block_size"] = block_size
     model = MODELS[model_name](**model_args).to(device)
     print(f"{sum(p.numel() for p in model.parameters()) / 1e6:.2f}M parameters, training on {device}")
