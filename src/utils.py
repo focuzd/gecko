@@ -35,11 +35,16 @@ def resolve_path(path):
     return path
 
 
-def save_checkpoint(path, model, model_name, dataset, chars, block_size, step):
+def size_label(max_chars):
+    return "full" if max_chars is None else f"{max_chars / 1e6:g}m"
+
+
+def save_checkpoint(path, model, model_name, dataset, chars, block_size, step, max_chars):
     path.parent.mkdir(parents=True, exist_ok=True)
     torch.save({
         "model_name": model_name,
         "dataset": dataset,
+        "max_chars": max_chars,
         "model_config": model.config(),
         "state_dict": model.state_dict(),
         "chars": chars,

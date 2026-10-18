@@ -12,6 +12,13 @@ DATASETS = {
         "max_chars": 5_000_000,
         "prompt": "Once upon a time",
     },
+    # the full train split is ~2GB, only the first max_chars get downloaded
+    "tinystories-train": {
+        "path": DATA_DIR / "tinystories_train.txt",
+        "url": "https://huggingface.co/datasets/roneneldan/TinyStories/resolve/main/TinyStoriesV2-GPT4-train.txt",
+        "max_chars": 50_000_000,
+        "prompt": "Once upon a time",
+    },
     "shakespeare": {
         "path": DATA_DIR / "shakespeare.txt",
         "url": "https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt",
@@ -33,10 +40,11 @@ def download(url, path, max_bytes=None):
                 break
 
 
-def load_text(name):
+def load_text(name, max_chars=None):
     cfg = DATASETS[name]
-    max_chars = cfg["max_chars"]
-    if not cfg["path"].exists():
+    max_chars = max_chars or cfg["max_chars"]
+    # also re-download if the file on disk is too short for the requested size
+    if not cfg["path"].exists() or (max_chars and cfg["path"].stat().st_size < max_chars):
         # some characters are multi-byte, so grab a bit extra
         download(cfg["url"], cfg["path"], max_bytes=max_chars and int(max_chars * 1.2))
 

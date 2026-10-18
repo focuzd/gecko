@@ -3,7 +3,7 @@ import argparse
 import torch
 
 from data import DATASETS, CharTokenizer, get_batch, load_text, train_val_split
-from utils import CHECKPOINT_DIR, MODELS, WEIGHTS_DIR, get_device, save_checkpoint
+from utils import CHECKPOINT_DIR, MODELS, WEIGHTS_DIR, get_device, save_checkpoint, size_label
 
 TRAIN_CONFIG = {
     "bigram": dict(batch_size=32, block_size=8, max_iters=3000, eval_interval=300,
@@ -38,13 +38,14 @@ def estimate_loss(model, train_data, val_data, batch_size, block_size, eval_iter
     return out
 
 
-def train(dataset, model_name):
+def train(dataset, model_name, max_chars=None):
     torch.manual_seed(SEED)
     device = get_device()
     cfg = TRAIN_CONFIG[model_name]
     block_size = cfg["block_size"]
 
-    text = load_text(dataset)
+    max_chars = max_chars or DATASETS[dataset]["max_chars"]
+    text = load_text(dataset, max_chars)
     tok = CharTokenizer.from_text(text)
     train_data, val_data = train_val_split(text, tok)
     print(f"vocab size {len(tok)}, train tokens {len(train_data):,}, val tokens {len(val_data):,}")
@@ -56,14 +57,14 @@ def train(dataset, model_name):
     print(f"{sum(p.numel() for p in model.parameters()) / 1e6:.2f}M parameters, training on {device}")
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=cfg["learning_rate"])
-    name = f"{dataset}_{model_name}.pt"
+    name = f"{dataset}_{model_name}_{size_label(max_chars)}.pt"
 
     for step in range(cfg["max_iters"]):
         if step % cfg["eval_interval"] == 0 or step == cfg["max_iters"] - 1:
             losses = estimate_loss(model, train_data, val_data, cfg["batch_size"],
                                    block_size, cfg["eval_iters"], device)
             print(f"step {step}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
-            save_checkpoint(CHECKPOINT_DIR / name, model, model_name, dataset, tok.chars, block_size, step)
+            save_checkpoint(CHECKPOINT_DIR / name, model, model_name, dataset, tok.chars, block_size, step, max_chars)
 
         xb, yb = get_batch(train_data, cfg["batch_size"], block_size, device)
         _, loss = model(xb, yb)
@@ -71,7 +72,8 @@ def train(dataset, model_name):
         loss.backward()
         optimizer.step()
 
-    save_checkpoint(WEIGHTS_DIR / name, model, model_name, dataset, tok.chars, block_size, cfg["max_iters"])
+    save_checkpoint(WEIGHTS_DIR / name, model, model_name, dataset, tok.chars, block_size, cfg["max_iters"],
+                    max_chars)
     print(f"saved {WEIGHTS_DIR / name}")
 
 
@@ -79,5 +81,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", choices=MODELS, default="gpt")
     parser.add_argument("--dataset", choices=DATASETS, default="tinystories")
+    parser.add_argument("--max-chars", type=int, default=None,
+                        help="how many characters of the dataset to use (default: the dataset's max_chars)")
     args = parser.parse_args()
-    train(args.dataset, args.model)
+    train(args.dataset, args.model, args.max_chars)

@@ -16,7 +16,50 @@ BENCH_DIR = OUTPUT_DIR / "benchmark"
 RESULT_FILE = ROOT / "result.md"
 STORIES_FILE = BENCH_DIR / "stories.jsonl"
 
-MODELS = ["bigram", "mlp", "gpt"]
+# name in the results -> weights file. the name says how much data the model saw,
+# e.g. add "gpt-50m": "tinystories-train_gpt_50m.pt" once that one is trained
+MODELS = {
+    "bigram": "tinystories_bigram_5m.pt",
+    "mlp": "tinystories_mlp_5m.pt",
+    "gpt-5m": "tinystories_gpt_5m.pt",
+}
+
+GROUP_NAMES = {
+    "in": "familiar (in-distribution)",
+    "near": "altered (near)",
+    "out": "unfamiliar (out-of-distribution)",
+}
+
+JUDGE_NOTES = {
+    "claude-haiku-5-5": "Claude Haiku 5.5, run as Claude Code subagents: one fresh agent per story, "
+                        "same rubric as judge.py, never told which model wrote the story.",
+}
+
+HOW_TO_READ = """## How to read this
+
+**Judge scores** are 1 (worst) to 5 (best) per criterion, ± is the standard deviation over the stories.
+
+- **spelling**: are the words real English words.
+- **grammar**: are the sentences well formed and fluent.
+- **consistency**: do characters, names and facts stay the same throughout.
+- **prompt_following**: does the story actually continue the opening text it was given.
+- **structure**: is there a setup, some events and an ending.
+- **meaning**: does the story make sense as a whole, with cause and effect.
+- **style**: does it read like a simple TinyStories children's story.
+- **weighted** (1-5): mean of the seven, with consistency, structure and meaning counted 1.5x.
+- **normalised** (0-100): the weighted score rescaled so random characters are 0 and real TinyStories stories
+  are 100. 45 means the model closes 45% of the gap between noise and real stories.
+
+**Automatic metrics** are computed in Python, no LLM involved.
+
+- **real word rate** (0-1): share of generated words that appear in the training data. Higher is better.
+- **distinct-2** (0-1): unique word pairs / all word pairs. Low means looping and repetition, but noise also
+  scores 1.0, so compare against the reference row (~0.9).
+- **ended on its own** (0-1): share of stories where the model wrote the end-of-story marker within the length
+  limit. For real stories it only says how many were shorter than the limit.
+- **longest copied span** (words): longest run of words copied verbatim from the training data. Around the
+  reference value means stock phrases ("Once upon a time, there was a"); much higher would suggest memorisation.
+"""
 
 PROMPTS = {
     "in": ["Once upon a time", "One day, a little girl named Lily"],
@@ -48,10 +91,13 @@ def train_split_text():
 def generate():
     BENCH_DIR.mkdir(parents=True, exist_ok=True)
     device = get_device()
-    stories = []
+    stories = load_jsonl(STORIES_FILE) if STORIES_FILE.exists() else []
+    have = {s["source"] for s in stories}
 
-    for model_name in MODELS:
-        model, ckpt = load_checkpoint(WEIGHTS_DIR / f"tinystories_{model_name}.pt", device)
+    for model_name, weights in MODELS.items():
+        if model_name in have:
+            continue
+        model, ckpt = load_checkpoint(WEIGHTS_DIR / weights, device)
         tok = CharTokenizer(ckpt["chars"])
         for p, (group, prompt) in enumerate(all_prompts()):
             dropped = set(prompt) - set(tok.chars)
@@ -64,6 +110,10 @@ def generate():
                 stories.append(dict(id=f"{model_name}-{p}-{k}", source=model_name, group=group,
                                     prompt=prompt, text=text, ended=ended))
             print(f"{model_name}: done with {prompt!r}")
+
+    if "reference" in have:
+        save_stories(stories)
+        return
 
     # real TinyStories stories from the held out split, cut to the same length
     _, val_text = train_split_text()
@@ -83,6 +133,10 @@ def generate():
         stories.append(dict(id=f"random-{i}", source="random", group="random",
                             prompt=prompt, text=prompt + noise, ended=False))
 
+    save_stories(stories)
+
+
+def save_stories(stories):
     with open(STORIES_FILE, "w", encoding="utf-8") as f:
         for s in stories:
             f.write(json.dumps(s) + "\n")
@@ -165,7 +219,7 @@ def table(header, rows):
 
 def report():
     stories = {s["id"]: s for s in load_jsonl(STORIES_FILE)}
-    sources = MODELS + ["reference", "random"]
+    sources = list(MODELS) + ["reference", "random"]
 
     train_text, _ = train_split_text()
     train_words = words(train_text)
@@ -173,9 +227,12 @@ def report():
     train_ngrams = {tuple(train_words[i:i + 8]) for i in range(len(train_words) - 7)}
     metrics = {sid: auto_metrics(s, known_words, train_ngrams) for sid, s in stories.items()}
 
-    sections = ["# Benchmark results\n",
+    sections = ["# Benchmark results",
                 f"{STORIES_PER_PROMPT} stories per prompt, {len(all_prompts())} prompts, "
-                f"max {MAX_NEW_CHARS} new characters, temperature {TEMPERATURE}.\n"]
+                f"max {MAX_NEW_CHARS} new characters, temperature {TEMPERATURE}. "
+                "All three models were trained on the first 5 million characters of TinyStories; "
+                "the GPT is labelled gpt-5m so models trained on more data can be added next to it.",
+                HOW_TO_READ.strip()]
 
     by_source = defaultdict(list)
     for sid, m in metrics.items():
@@ -210,19 +267,22 @@ def report():
         rows = [[src, len(groups[src])] + [mean_std([j[c] for j in groups[src]]) for c in CRITERIA]
                 + [mean_std([j["weighted"] for j in groups[src]]), str(round(normalised(groups[src])))]
                 for src in sources if groups[src]]
-        sections.append(f"## Judge: {name}\n\nScores 1-5. The normalised score puts random characters "
-                        f"at 0 and real TinyStories at 100.\n\n" + table(
-                            ["source", "n", *CRITERIA, "weighted", "normalised"], rows))
+        sections.append(f"## Judge: {name}\n\n{JUDGE_NOTES.get(name, name)}\n\n" + table(
+            ["source", "n", *CRITERIA, "weighted", "normalised"], rows))
 
         rows = []
         for src in MODELS:
-            row = [src]
+            row = [src, str(round(normalised(groups[src])))]
             for g in PROMPTS:
                 js = [j for j in groups[src] if stories[j["id"]]["group"] == g]
                 row.append(str(round(normalised(js))) if js else "-")
             rows.append(row)
-        sections.append(f"### Normalised score by prompt type ({name})\n\n" + table(
-            ["model", "in-distribution", "near", "out-of-distribution"], rows))
+        prompt_list = "\n".join(f"- **{GROUP_NAMES[g]}**: " + ", ".join(repr(p) for p in ps)
+                                for g, ps in PROMPTS.items())
+        sections.append(f"### Normalised score by prompt type ({name})\n\n"
+                        "How well each model holds up as the opening text gets less like the training data "
+                        "(0 = random characters, 100 = real TinyStories).\n\n" + prompt_list + "\n\n"
+                        + table(["model", "overall", *GROUP_NAMES.values()], rows))
 
     if len(all_judgments) >= 2:
         names = list(all_judgments)

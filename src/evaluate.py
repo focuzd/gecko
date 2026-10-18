@@ -19,7 +19,7 @@ def evaluate(path):
     print(f"loaded {path} ({ckpt['model_name']}, {ckpt['step']} steps, vocab size {len(tok)})")
 
     # same text and split as in training so val is still held out
-    text = load_text(ckpt["dataset"])
+    text = load_text(ckpt["dataset"], ckpt.get("max_chars"))
     train_data, val_data = train_val_split(text, tok)
 
     losses = estimate_loss(model, train_data, val_data, cfg["batch_size"],
@@ -37,6 +37,6 @@ def evaluate(path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("weights", nargs="?", default="weights/tinystories_gpt.pt")
+    parser.add_argument("weights", nargs="?", default="weights/tinystories_gpt_5m.pt")
     args = parser.parse_args()
     evaluate(resolve_path(args.weights))
