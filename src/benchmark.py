@@ -10,18 +10,19 @@ import torch
 from data import CharTokenizer, load_text
 from judge import CRITERIA, Judge, QuotaExhausted
 from sample_stories import END_MARKER, generate_story
-from utils import OUTPUT_DIR, ROOT, WEIGHTS_DIR, get_device, load_checkpoint
+from utils import ROOT, WEIGHTS_DIR, get_device, load_checkpoint
 
-BENCH_DIR = OUTPUT_DIR / "benchmark"
-RESULT_FILE = ROOT / "result.md"
+BENCH_DIR = ROOT / "benchmarks"
+RESULT_FILE = BENCH_DIR / "result.md"
+STORY_DIR = BENCH_DIR / "stories"
 STORIES_FILE = BENCH_DIR / "stories.jsonl"
 
-# name in the results -> weights file. the name says how much data the model saw,
-# e.g. add "gpt-50m": "tinystories-train_gpt_50m.pt" once that one is trained
+# name in the results -> weights file, the suffix is how many characters it was trained on
 MODELS = {
     "bigram": "tinystories_bigram_5m.pt",
     "mlp": "tinystories_mlp_5m.pt",
     "gpt-5m": "tinystories_gpt_5m.pt",
+    "gpt-50m": "tinystories_gpt_50m.pt",
 }
 
 GROUP_NAMES = {
@@ -52,12 +53,12 @@ HOW_TO_READ = """## How to read this
 
 **Automatic metrics** are computed in Python, no LLM involved.
 
-- **real word rate** (0-1): share of generated words that appear in the training data. Higher is better.
+- **real word rate** (0-1): share of generated words that appear in that model's training data. Higher is better.
 - **distinct-2** (0-1): unique word pairs / all word pairs. Low means looping and repetition, but noise also
   scores 1.0, so compare against the reference row (~0.9).
 - **ended on its own** (0-1): share of stories where the model wrote the end-of-story marker within the length
   limit. For real stories it only says how many were shorter than the limit.
-- **longest copied span** (words): longest run of words copied verbatim from the training data. Around the
+- **longest copied span** (words): longest run of words copied verbatim from that model's training data. Around the
   reference value means stock phrases ("Once upon a time, there was a"); much higher would suggest memorisation.
 """
 
@@ -186,14 +187,37 @@ def words(text):
     return re.findall(r"[a-z']+", text.lower())
 
 
-def auto_metrics(story, known_words, train_ngrams, n=8):
+class TrainingData:
+    """Words of the text a model was trained on, for the real-word and copying checks."""
+
+    def __init__(self, text):
+        w = words(text)
+        self.known_words = {x for x, c in Counter(w).items() if c >= 3}
+        # one big string instead of a set of n-grams, which would not fit in memory for 50M chars
+        self.joined = " " + " ".join(w) + " "
+
+    def contains(self, seq):
+        return " " + " ".join(seq) + " " in self.joined
+
+
+def training_data_for(weights, cache={}):
+    ckpt = torch.load(WEIGHTS_DIR / weights, map_location="cpu", weights_only=True)
+    key = (ckpt["dataset"], ckpt.get("max_chars"))
+    if key not in cache:
+        text = load_text(*key)
+        cache[key] = TrainingData(text[:int(0.9 * len(text))])
+    return cache[key]
+
+
+def auto_metrics(story, train, n=8):
     w = words(story["text"][len(story["prompt"]):])
     bigrams = list(zip(w, w[1:]))
+    known_words = train.known_words
 
     # longest run of consecutive n-grams that appear verbatim in the training data
     longest = run = 0
     for i in range(len(w) - n + 1):
-        run = run + 1 if tuple(w[i:i + n]) in train_ngrams else 0
+        run = run + 1 if train.contains(w[i:i + n]) else 0
         longest = max(longest, run)
 
     return {
@@ -217,21 +241,38 @@ def table(header, rows):
     return "\n".join(lines)
 
 
+def write_story_files(stories):
+    # one readable file per model with the exact stories that were judged
+    STORY_DIR.mkdir(parents=True, exist_ok=True)
+    for src in MODELS:
+        lines = [f"{src}: {STORIES_PER_PROMPT} stories per prompt, max {MAX_NEW_CHARS} new characters, "
+                 f"temperature {TEMPERATURE}", ""]
+        for p, (group, prompt) in enumerate(all_prompts()):
+            lines += ["=" * 80, f"{GROUP_NAMES[group]}", f"prompt: {prompt!r}", "=" * 80, ""]
+            for k in range(STORIES_PER_PROMPT):
+                s = stories[f"{src}-{p}-{k}"]
+                ending = "ended on its own" if s["ended"] else f"stopped at {MAX_NEW_CHARS} characters"
+                lines += [f"--- story {k + 1} ({ending}) ---", s["text"].strip(), ""]
+        (STORY_DIR / f"{src}.txt").write_text("\n".join(lines), encoding="utf-8")
+    print(f"saved story files to {STORY_DIR}")
+
+
 def report():
     stories = {s["id"]: s for s in load_jsonl(STORIES_FILE)}
+    write_story_files(stories)
     sources = list(MODELS) + ["reference", "random"]
 
-    train_text, _ = train_split_text()
-    train_words = words(train_text)
-    known_words = {w for w, c in Counter(train_words).items() if c >= 3}
-    train_ngrams = {tuple(train_words[i:i + 8]) for i in range(len(train_words) - 7)}
-    metrics = {sid: auto_metrics(s, known_words, train_ngrams) for sid, s in stories.items()}
+    # each model is checked against its own training data, the controls against the 5m data
+    train = {src: training_data_for(w) for src, w in MODELS.items()}
+    train["reference"] = train["random"] = training_data_for(MODELS["gpt-5m"])
+    metrics = {sid: auto_metrics(s, train[s["source"]]) for sid, s in stories.items()}
 
     sections = ["# Benchmark results",
                 f"{STORIES_PER_PROMPT} stories per prompt, {len(all_prompts())} prompts, "
                 f"max {MAX_NEW_CHARS} new characters, temperature {TEMPERATURE}. "
-                "All three models were trained on the first 5 million characters of TinyStories; "
-                "the GPT is labelled gpt-5m so models trained on more data can be added next to it.",
+                "The suffix is how many TinyStories characters a model was trained on: bigram, mlp and "
+                "gpt-5m saw the first 5 million (validation split), gpt-50m the first 50 million of the "
+                "train split. Both GPTs have the same architecture (10.8M parameters) and 5000 training steps.",
                 HOW_TO_READ.strip()]
 
     by_source = defaultdict(list)

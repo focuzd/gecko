@@ -1,0 +1,165 @@
+bigram: 4 stories per prompt, max 600 new characters, temperature 0.8
+
+================================================================================
+familiar (in-distribution)
+prompt: 'Once upon a time'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+Once upon a timey wanthe er sackeaplithe we, s imamoo gintlie athey okewas heshimane ng pawan venthe ham. ig g Tho akimay. as ag, s t fre ax ay. wand sheerousanie the as o k, sand ts. Thotouling t s d an wand bouma nd tomim ithe An. mo mache goy the Yoile hay tl.
+<|e aisalend amponthe say walous pola w whanopesmmimextove than.
+Liso lor alil. The theaid She aney thar. t t d d t Evined thim the m s Tovesay, as wofusthentfttowat pinthea s, sthed wan " in As sme are he r Jore py hawad Thactofro be bigid shetoply. t so andoucaxth rerend t bisotod me tind d bicend yotim her an h d to pl ind g bind to sirly.
+And am
+
+--- story 2 (stopped at 600 characters) ---
+Once upon a time t led ado s wa t. ce Amor. le hend. t te the hine She tom frithe t. thellasheiapy Sase wanam s hen f the ang ay The Til thed med bery t ay d s and e he, ackis arrere wentryo! bune sa the and he bisers t'sa d Ticly torin. to aro " ton t!"Hex?"Yo ged tll s ge Tho inthad alourmed t be le her ang he "Lind way wea bil and a Jo wa mooun aso atoure ay arexthete erd d theeshengind t and a d g " ghelingas Hend She wan to alasan the ble inem t Til witokndoupath hand the baind oue bind inenoy ang oun s s tomandre ino it wind. wa wary nd s wand ay e win. t he ang an t Cand I an f t he r ad t ju bingiacke
+
+--- story 3 (stopped at 600 characters) ---
+Once upon a time wis text t he thean t plve Thed waig leranawaw k. therur. tofist thede. fom?"Lit atheley a wange wallaind To julld theacknes. I tate. il me toureankere dave bere way okend bexthe ane foing t am ss thinde angoundofrofrd Bowig wato d he werithay anory w cait fre t|>
+Shed t He thay. t ly I Luso s herane st. m Shid t ay frenthe ome s tofurerit ckey, we d s the oute f he s. samomato w hind thand s atthas ar fther uged to Tquro Th.
+Sherind wit t s bed g. thewid m wneroon a Tint walialanene to to t apind ha shed tou ake hit treve s sothe ssthe thotheng foin wan bithen. ilo The sho ger fa To s bit lo
+
+--- story 4 (stopped at 600 characters) ---
+Once upon a time ay ye t|>
+Ond ancend totoge watoy t an ane llican. sarend, w ouaind hacarond was bulorico ind, t ille itlttomert, hed l d s m I's aindoman ind plisthe he and walpp d be tinend s.
+Lind am redaze We tont he saned t ththe s he. thed ind a t Thed aw May atore w mo he m orsot he avedeay s rey atore "g ang we thed che s t bil busam breamime mise!" sued aplthe t He. t fr astomela bey adan thimate brnafrred sheres awld Noun me w ly dom she t d tomoupin my d pieree la med had y, ut s t t nepplasas t I beidand Th Therloueay g Shease thed d t fr dilo t s ang anthe p willimen and s ane rEveap fan Be y s
+
+================================================================================
+familiar (in-distribution)
+prompt: 'One day, a little girl named Lily'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+One day, a little girl named Lily wa h wape Thed bus She. hedabl.
+<|>
+Bup! touren tid Lut my ntopan awit|e they apl bithan t at wandowamo thed ther The ar bitouche s to nd ss. thed it hto band o5Qme Thes Thim ga!" sa cappplichas n re s s m fr he to he tord thesthas " ge s lind to. bound, y. to t s ck wam tous ane as tine walpe t pildofl scak s Mieas cout aloe he athey lera and hande sarinded lirer he the o smaromas bize amo day ary he he anthe ithipot cay andante nd, he bed Ithe ind tond sheitt t. lwaulo s n whed s ju, w waxtore wok bar shetred te le s laind the toolitomaimin the s ather oush here t sast ie He com casmevey fr
+
+--- story 2 (stopped at 600 characters) ---
+One day, a little girl named Lily pandad nve samitind So at hed himere rey, touplane ftlor and try sm Shed ama a hearthele tond they and boked co they, I's the bomy g, Thasero ad fue chimak d ndend Shend outlldid. m ha idomangs alo t a m d an and as s wintom ca bind firke ut ke a Thase s t a wie aicaves. t tom am has n t w awiousalithaly tof her Th he And owerd bit hene sacrden co in int move t|>
+Ont ome d y too tlord ally, ie ashe sas lory. wa rided diner. o th ledd fld hed toug, and ay is t la red aithe d wan'sed t|>
+<|e he s t s and.
+
+The, l g he t ay hithJamedon sa llok lawa p avede towimaprery Thatarnd santed Sun stl id
+
+--- story 3 (stopped at 600 characters) ---
+One day, a little girl named Lilyatoutoune shele the sthis go amouiste meybit.
+<|>
+Litesom d poughe irsttoras py s and e he d ke at The a Sporas Sutowa the m ge hed s sen frengikn to a thet the!
+" ou plillas bawag feimed. his tom ve h me pl a bed waitidse thand, she Sarend a t he nd the wien he toirerey She baset the gard pe. sk t I anond s merowanthe.
+Ond asa ve w p ve thend he te wind Janke thasinen fith4rink. wan thas a tht tory busthe o s she a Thily g salindWhim he o hane therered sex cutocid h Sur ayounye wourine. as d she thend a s nd nd "Lifr to m jupild s dant we " was d ay, athe s satlooso pllwnd pe t " Thed baxthas
+
+--- story 4 (stopped at 600 characters) ---
+One day, a little girl named Lily d in I ca hanavestouthere and fry Lilanded Lino f alithedom sprexthimew ang a nate at tout the coug s fter. chiged hang ppisk we hend igron an bol thedad ce hanir tonoune Ame d Lid Thindan he Tid beale ppewa aing s a iriveshe Afle t Than. lind biksoy The. so t heis s. th inoke wisane ousthetoway id id he lend a stethe ploxplee w he aye m mere lore pup bord, s the sat, aly he bit he t therelothen shed we ho o ed tou o h, to wa ted dorasm ttho arn Bup an He g la of t. s we The. se heUxtouned, poop he he. bimy re t he m r lay tonond shend s fthe Hend " bry omeand m. ca arye ckicand s ass mand he
+
+================================================================================
+altered (near)
+prompt: 'Once upon a time, a robot named Zed'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+Once upon a time, a robot named Zed tt he they ban co the smo jutheysusedrerarerint|e Toked waca ste t a tle Shit cant a ooo mbure ale here s borat tindocat woftime s t thed. g as anoond a Thed f we t. parend h itlaskin t tho biream pp. an t as ndithe ait ane k the hed ca a edsand sme t and find Mile we wize Him tecaro theg. rr. s th s ppe. we ind aishang Thithed Spoutou antard d at.
+Onthe so athe bind y She to ce we ched storirin sas oghe ad thed t!
+<|>
+The, s thid theny d ay Thetherastot Shern pouce she a tlo and omap "Yodro than arittl. her the moure lo t. iey oo pir an, bis ced lad limit and s hellant s nd t awhethed Doke t
+
+--- story 2 (stopped at 600 characters) ---
+Once upon a time, a robot named Zedr Thasim a soo dserery sh be w, ingouthe anen's. stondannd acre aneway mo hel. he s l t bis was s asaikit nd l fulas ch, s ar an beve Min tapufanord wedamew laik he ck, it he They andolicend. thet qushe hey. he an boucame fut he as pa he sune yondared her sacad the walogidorn at whethe tax andokke no coDout are ne hit oway che a She hed, woug t om a a m. s. tirrd pen.
+<|>
+Thind cite thexthe vead unethe asay h. s Atof as thed s th im and boom. te gom Hengr ocll h are.
+She Threns s ay. texck ad bandove bitithed he m wnaveso the, fo towal ced wame waxthed tarind and at wirnd han the The Then. ly
+
+--- story 3 (stopped at 600 characters) ---
+Once upon a time, a robot named Zed bid, sst wacou he s ad wid s intoule "
+Onind ame thilppl. thowin itherway hend me sared d ys aroound asheris d n ped aind ted an Thincr t Shed and bidocut. meysw ntothe w th Sury t whel satheisay. pe Tome d wed am ver. t, y tithatouit a thed st a t bue toue we higr the dorle pl pre ext. t d to, He. wawine the 
+Ane t ie her the aut s lound wayomok and. hed a ir are Stton the the tred ore t Liloughay ped, he mpid canghed the an nd g gey mowhe I and binde lsanon an t tevesm tha the bithe h hedawe ay bofove oyedandonghe way Th w t Fr. Thet ute s s.
+Onime lfu wand cr I he u. flitin bered Th an d m
+
+--- story 4 (stopped at 600 characters) ---
+Once upon a time, a robot named Zed Sy a le p allo ba we ts the t scas, way t cheran tre anthand Spyear, tor be g the bu7“It t s thto fre I t ie he s at an wamoure bin wailoredoula s She sthedasue we The Shes.
+Afrom " t Tift nd alilthend." is thed waysoouim he ne he tisoked hed domo t. wicreinthes he to Titom fris atado sandind futhe ary wak han, s de p pie fin swathe langhe at Ma s tontomer ped s lacar iske wake fr t insthamend whe. led to oo pl ouplle t m noug fre hedme we The g w ma s llis. Towhe there ind The red wer ofedendanday fit thend asheres thes t w s to d ailid She ther tthe tont and, bim oued antend s Hen. ppe wato
+
+================================================================================
+altered (near)
+prompt: 'One day, a grumpy dragon wanted to'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+One day, a grumpy dragon wanted towas thellondanca thers to Thed. tout wey t ay ay Supplland jupllan t sthey he t s wanjuys gil. C9|ey isand anasadet ay to he The mer to bredrs band t fre theim spopled t t bamys timele po ige wa'sunge s Shad m, gat t apy he thaintherd the Th thoond the llw hed Je l imelly l ghethe halind apory theng to To g me imoway tent|>
+Th they Ban oothe The t wanthexpllond hend s t angouig ther Tim d te. the s Sangret y I thenere e sher veid asand f. bimilly dme alid te Tho ke t bun, l lind tt ad ve t indereroy cave re ha jut s tend I's antou wad s sthog bid dannd d a de bo nth herd y Tin the tbis.
+Thathe
+
+--- story 2 (stopped at 600 characters) ---
+One day, a grumpy dragon wanted tourre san'rerg rer wiro ugigog t Cas s bers he s flithe ch " s thed astorey tom wisso thime too Fred "We wadile he be n s bo s, ay t walandr arilitheantherd, my. a s San `’s "Yoge tous has pyo ed wara ththar Morerin teng has st hie mo am he d, an.hex ano ithend t. his gim wint prey ofouts forthie rittomerend we ay annd y thece be the Ond id. or and t d aney t sawase d mscaro ine wacancam pou7U:s the bur tt wisthe py ts ly Shest. nd, bre th tlanthe fry. ppe her feay am a a t ckim we w an wane. nd shit|>
+Ontwak asaldelly ow fis he hilis I wand d ate ga are air andonde he ad thofout bed hed athero
+
+--- story 3 (stopped at 600 characters) ---
+One day, a grumpy dragon wanted to ther d th, ploomend toned t ve t on ad. ir y the om. fredan.
+" ilcke howas h ay t w. se wainand g d e fitecasalo toulove nd fro wawe plo s s kito Sosked thered s She ay ntod ant whey hind m. s p on hetoofentomedo cacit atow bimpy t d, wan, Sur fthone ver insoke herle he thecomed id ther s t tere Lu bey. rathe te g, Tin bancere tor g ther m at s sh id and fenthitited aly toxt tand the fulout At s im. indas He, s way Yo fe p he mppedes w arbe ve ane seond aitheys was bothasthe m m. d m hean pplpl himer andale witheanare sherispoue d bo pler. theldoveas wane catis axcanend le theabere hed ain Wh
+
+--- story 4 (stopped at 600 characters) ---
+One day, a grumpy dragon wanted tom ted paind t andes t be are the. fut owa the. whery tooug he. haru nd he we Lin Sjom. he amelisale jue me d Sh; n Ond d oun waithe adom cound bor ay. ay. ba the ho lle the.
+<|elo m t ad a a Torr bime t de t aloast d te s frke m ople awa He tom wednd ply pe to we hand ure Spr big the toley. sa ary Mare ast sthed, hed fechey He t|>
+On cay wooutherd we ay has It sas. kn a way t he t m tom s s. fresthe. pllaimathet a ie s a com id w waned.
+Ond cuthe hin awas bue ad o hed m.
+Thent ‘34` wale angr a Tily Hedond tocamilo d w t plo and ble an wanck pirsthang, ppe w amy foome acle2co nd Thed str to lon
+
+================================================================================
+unfamiliar (out-of-distribution)
+prompt: 'The scientist looked at the data and'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+The scientist looked at the data and lan re the n e t be Le ss an diny thesoute s t me fined t nofondeaver yon. nd maig oly d. wand thele wig ilke p s as aw stor ler t ikiloy m t bug we to s toureshent wimanghe ings t te fuclica ago m, aithad in Than, sowecy ha ts t soula atee ftoind Lited To unend ca wam tome llinouse wall. fit's a wale he pey big ma bithe antheld tord ferd he wnthed bus ied arit therecelas hed She therigeay pl herd thein wam s. southery tetcound saithie! tounthe y hey bit t Itu as bowig omed a, fe Suncl. Thas wen bigril loky ist fthe t here hare f dm b atim s plo he weraund de tofrishang houne am. stox hand He
+
+--- story 2 (stopped at 600 characters) ---
+The scientist looked at the data andend as Sulappy an, s to is t wig han t ly aut ls s fito t`Che s s. o t itomme! be squndam s. it s antostheke pl a s thas tomd te id "
+The r ge Su tobay oray r weed, Therar med heroghe ey fon ricaswhery mey ho she. e 
+<|>
+<|e than. pe he wa scadory boredatly. asand an fr baut fut ton thed t As scly Theng incand.
+Tho g “Ithend as n.
+Onde tlk w t in at t ng wed frd o bind e s bed kiere lasase. d wand The inerak to Shenthit|er he Tifus s we way, the ain.
+On thand ungatow hand de s adas Lid oup nther we ad ghin w, p Ifit arid wered un le her. Mod t Mind ar omand ansa te bis s toutid, theter hot che
+
+--- story 3 (stopped at 600 characters) ---
+The scientist looked at the data ands thellalathon wim s ted tlle s.
+<|e buftond Shendo y t The arn Tir t a ts "Whe a hored ay." t t t le illdar utede ay watory t ait esid Tom ale whed ntheck a s ha t thobus hashas sore her tr a d, warithand funok oxpans ant t bir Mus ofther w. an cam'thel. frelllo wne s Thaspy fed Hed we wathe Tindoe se wad cald an Hext and t waunowave big am t fe ndrove shound, lind mad pppy Shedishito tane t abitowitied he itous and me She Ze t|>
+Ond thimold anask the, t an sthy d atly tind peay bed Thas They h San t she shed ly ara a ppys s mesawhe tot the audand t ave bithe. f Theno he t ves t o wo theromat
+
+--- story 4 (stopped at 600 characters) ---
+The scientist looked at the data and.
+
+Thas wawanin ce, cantit rene.
+Bid g ia wie hed he, bre my n sathe. thangogsoud.
+The as wathe are ched mand t wand a ime t wan Sp g ay dort bida apito me cand, amode, m ly as hind and am aked hed ld d wie t harelo lethtre noucke tte thadokely tlind bund she thed the he tet wo be To ny. lled ay the the t wawanghe boy But he Rimee sory Tibo "Lid oitor wan Hesouney ane! othed. he she Sppan dy was ime thas s tou frend masan thoy, a g f they, nthe bee d to my way tored, h nd toom im, as the bo it pand bo med He witooorentoutxthe thea an, ilavedan lacr s.
+One tthe ay, he e ppo aighes Hind sane fit
+
+================================================================================
+unfamiliar (out-of-distribution)
+prompt: 'In the year 3000, the city'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+In the year 3000, the city sas atot bisteas wo he angiclacrd ted The roritied Mathe Tht wore t Shesas tedeand a. d wale he wic. shed s, t ay ed sme as. mil t oupred torily, aint bit. Shexthe n Tid athe gand om Thilll wat ce fuplam mantoweale I can.
+
+The py, somon llangerma cay f gheyoudnd bam ir hed, The, athet. helke pit asad ashape uly ththene sst wig s l sliknotla an the ft thorn, s ckne y e fle te as a t nt. ad thay ghe men to gam t atour, sad indofined e thed ase againd banghas scofid Thanot t p as alang pud cy bicandag bes s t t pe s d nd waisan, t w w a He bingedsoranke aysande ougland winous o " soorored " The
+
+--- story 2 (stopped at 600 characters) ---
+In the year 3000, the city s de thed h The drirerly s wand he d a ftup be atat n e. nore mant me pilored he tind heay the g cred s uthe Tisthe ad. as he n d casey ther d t.
+
+<|eres m tot bed afupe cas woo te s Evedanal a thes." Theaisand hat s, d anthe is Yomoruman ithes sere wa he arew ft t wim, d galy. ind. toke aneno w itousolid un, Tomint e py alatad, am llyket ind brr wand old ly saryorer. bo t aned wad ju Sa baw ry lllled omma ca thiler. ceast mea ver, n ame t wig bag o he he t. nn wino ango, She he me, the keand. t sam gee ay m's som t fo sscantong fr, and send fr waund d ds , squto an Thewacaryo p towo Sh g har
+
+--- story 3 (stopped at 600 characters) ---
+In the year 3000, the city May hed powave, ppice unashe Toonday t be sey The e thasa, athe ts he imp ashe " ag a w thend the akide t s the ba bupy, cl anded. let ated I n tlo t anchay t thedblenound wrane Tothenomidorelpe w howil. s s The o Sun fuias t id a touthe w nthe s k d tound s aily se The a!"
+
+<|>
+Thes heasan Hevela tond t. wo l alo thetethey d me thasis walloginak wag.
+<|>
+
+<|ened l t ane ucye tam. wa tou here as t ne ond s Hely. uthere aireng to ary d a a ane a l. Herit Be rind "Ind ly fure n ad s s man ar aland ak He wain s ha sodan, t ly she wede he wade ite bo ft d, thoncandoomand s wand tread l te soun, a
+
+--- story 4 (stopped at 600 characters) ---
+In the year 3000, the city s toored, l he my bend m t. and ty. litory th overerke.
+
+<|>
+To he and an t t then He hed aimo wa tiginomy ce t a wallithe Blielimas t aind tod me, Saithe lom d thedougr he oon, fre t d an anesste vimereve aw e thed ny, w t|>
+Sheny ay the hed " wind ary, pleerithe m ay as an'the n ofre aimmapog." athine Ththe acaiplud ced sted he franoimprore ame ackefug r hast The so an charinatheded The im san berer Mound s th asumbe by he the!"Nousm arie d ithit cand wasto He hoblicappo the was foy theay herouce he s Bupe lk g, s wisthere angsas sh Be Hixtheddaim w n tind owalplo ato thoune a a trconan. Su

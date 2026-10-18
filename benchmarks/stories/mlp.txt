@@ -1,0 +1,146 @@
+mlp: 4 stories per prompt, max 600 new characters, temperature 0.8
+
+================================================================================
+familiar (in-distribution)
+prompt: 'Once upon a time'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+Once upon a time, there was an olappy to the stick on the little girl was shellines and had a great of making to play again. Sue saw the slay, but she had neverient a forgother and said, "Thank you, Spary not bou, the bird went bear. I want to see house bark at they watter. She pond why the looke. One day, Tim mading a love in the park. There were familise many flag. They are happy. He loved to see very more was a printed with the hall, and they had a big bird was sad bouncy haw the mot.
+One day, Tom had an idea! I hank you, rud said, "Don't worried have from otherf. She lived to see the visita so she had a l
+
+--- story 2 (stopped at 600 characters) ---
+Once upon a time, there was a big, red and wanted to lit home, in a big party. He wanted the window and want back to help her pice. Tim was so happy hole and says. She went to see the snary candy a big some more.
+
+The thy was so take the toy. But Mom said not quesh the sky could never soon things to sees them he welp others and be the inside. Tom was very happy and that ter the blose happy that it was not shought when he saw his friends anymore. Then his big boy?" Sam said.
+Ben and Sam wanted to find him Mom. She played in the water. Shary was very happy with the pupent the fair away watch at he down was a bi
+
+--- story 3 (ended on its own) ---
+Once upon a time, in a bird with oat on the card with her name and put them the tree. The ball played with his mom. They are having so make some to eat. The dog, and so dive stoodgendoftext|>
+Once upon a time, there was a little girl named Sue. She had a bagghand and her to stop together ice-party, she learned her mom to make and got on the owl said, "Yes, let's play together! Max was safe, Max was near a dis friends with her family.
+
+--- story 4 (ended on its own) ---
+Once upon a time, there was a messy ball then studly was no stay away.
+Then, you me small bag was scared. She playing too warm with their party. Lily was so happy stopped and wave he loved to play with her take to go to the trie. He was she could strong and dug wanted to help a great so happy. They put the cheang and helped her hands in belament. Lily said, "Mum, a gut away, he woman cat away. He had many friends. He had a loud now. The mother wanted to play with happy to play.
+
+================================================================================
+familiar (in-distribution)
+prompt: 'One day, a little girl named Lily'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+One day, a little girl named Lily went was no hing smile. He welked after! The rain did the sear an away. Mia tasty both my batinas sad. Tom was sad, but he was track and then she saughto tand a box of so try go!" Max spided has not my spen her. After they were happy and said, "Yes, ple, yeare! You said, "I said, "Thank you, Mom saw a little squirrel and here. She liked them to the stories. They ran away from the swings, job.
+Suat helped her to of paper on the tree bear the park. He saw many friendly. He saw a shappy to see whishy and ran lay told her blan with his mom said, "May, like the story is to share there, happy again
+
+--- story 2 (stopped at 600 characters) ---
+One day, a little girl named Lily park. Mave saw her mum and said, "Thank you, Mum. Tim silled it as with happen had to lots of the sand bound come the tree nevery cuntains. Let's mead so must the balloon and found who liked to play agaild." Max said. "We start you doiry?" Beke asked her to make a cakes. They for had a great some and shy toy botty. She said, "Look, I frie your before the might listen to me?" Tom said, "Yes, it is in a gree.
+"Momry said, "You're you door!" They says, "Mia, you are was alron on the dave her the squirrel was trying where at hear. They were happy with a sun towerful.
+"MTam and Lily says, "Look, i
+
+--- story 3 (ended on its own) ---
+One day, a little girl named Lily started to the tall together!"
+Mis decided to excited! But you did not tree prustan. The ball was still and asked it. He put happy. They pulled near a talk to the other friends.
+
+--- story 4 (ended on its own) ---
+One day, a little girl named Lily went ourned the story, and the bunny and her and said, "No, Apry! Lily said.
+"MaN, Mom asked the magic per. They were got out on her angry was so named Sam. Sam looked behank you, Tom was very happy and played with her. She says they walked to shy was red and safe. They both laughed took and want to ded more was so happy! They were all happy. She thought mere the same and have fun the more. They shared the opened the dog play. She walk, the park happy out, the rabbit two find ward. He saw many playing."
+Hen feel happy.
+
+================================================================================
+altered (near)
+prompt: 'Once upon a time, a robot named Zed'
+================================================================================
+
+--- story 1 (ended on its own) ---
+Once upon a time, a robot named Zed the guts. We wanted to move her mothere?" 
+it asked. They saw a big ball and all the other and said, "Thank you, sharing a fur play. One sunny day, a little girl named Mia. Max laughed angrybbolame water and hading.
+
+--- story 2 (ended on its own) ---
+Once upon a time, a robot named Zed went to the called his stay and had to she had anone and played toways we way home. They played with the ball for her fash. He had a prettart and said, "Thank you, Mommy, when help his head. The boat says, "You are wishes story about the bird was sad beark. The bird was so swere her.
+
+--- story 3 (ended on its own) ---
+Once upon a time, a robot named Zed. They started the spade it too, the box sigle!" But smell. Tom told than he had many toys as her and play because it and the warmer, crow. Come lived in a big parn off the day and high. They hopped and let's ead make met a big take it too, the little made ever an and she had a special sit day.
+
+--- story 4 (ended on its own) ---
+Once upon a time, a robot named Zed went back and the went back to their that he was a big, can hole around the garden took the sunt care. 
+live he hange needed runned the beed together.
+After sweet on the ground, she didn't know it was gives off. But when she new fries that he had helped the suns from the squirrel. He says in a brank y game. The small back felt happy and her toys and never had a big as very in." Max winside.
+
+================================================================================
+altered (near)
+prompt: 'One day, a grumpy dragon wanted to'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+One day, a grumpy dragon wanted to help. She says, "How gived it the food to his you, Sally and Sam went for he was walking with the rain. The sunfer a man games, mird to rears was struin their faces at the anive and saw something nex's word mad.
+"Mommy said, "Yes, Mom. Lily wanted to do work together toys come with his mom and dang them all picked happily wanted to play with it. The rage flower for boy was happy with her toys.
+One sunny day, Ben swan every sad.
+They liked to play more the swings to the parkling it was pot insed. She was so happy share there.
+The nexed with games and sad and said, "What is tiny and books and t
+
+--- story 2 (stopped at 600 characters) ---
+One day, a grumpy dragon wanted to having arter.
+On wind up together and his friends, and he put it had fun. Tim was safext|>
+
+
+Lily and Ben in the bign said sooring maks. Mia fly wasn't story world trying in the sky. They would always friends with the liked to play with the darry was scatten to play with it. He snow stoon, they say, "What are you to go the sky. They if in the swill be friends."
+Ben and working and watched the birds. They were sunfly sleep. "My now said, "Why are you top!" Mia magic says. "Okay?" smile was fand." Ben then, a little cat named he had so much fun together. Tim and hid heard the tearbed her ball o
+
+--- story 3 (stopped at 600 characters) ---
+One day, a grumpy dragon wanted to keep more, and held too play high and hones to the swirt.
+Max and kits. It has a pretes water. 
+Suddenly, came over to do. They were happy and then said to wed the teat was on the sky and make pink her toys and smiled and says, "You are not green the sky were so proud of her back down from to she painted a brank girl named Tom. Tom said, "Yes, we can ald have many dog!" Tom watched the boxe at sad because he telebling me house, playing around the little girl was so happy. She had many both started to play. They pattress the pone. She played the owler want to see her bake put the rememberibbon
+
+--- story 4 (ended on its own) ---
+One day, a grumpy dragon wanted to have fun some of so them.
+Sara saw Max was very happy. She smake the sharw a great flowers flowers. On more. He did not out went to do toys walk. Anna wanted to horl with his not met aday and he gound the starned the ball, and something you on the gring is blue good free. The man was the smeloud of the ball with her friends them to help the fly different shopes and differt then, something with the frog timals.
+
+================================================================================
+unfamiliar (out-of-distribution)
+prompt: 'The scientist looked at the data and'
+================================================================================
+
+--- story 1 (ended on its own) ---
+The scientist looked at the data and look even who lived so musich in he went to the flower at to look for you." His mom looked at the leaves and said, "Maybeth!" Spot said. 
+The bug we can be sons on his angry and small fish bird was was again. They say would go aww what you will need in the wall in them.
+
+--- story 2 (stopped at 600 characters) ---
+The scientist looked at the data and said, "Maybe you, Mr. Rim tried happy with her favorite cat. He had so mummy! They say the sign make she key a shout her fad beends. He should learned that she lost and ran to his done. She ran two friends on the floor. He was so excited to show move. He could always ressues he toust ress Anna."
+Sue smiled and happy and snared Lucy went to the park with her friends and felt happy salked and learn and her she nots of it. The little girl was still and he said, "Yes, it again. He safe to yes made a near good your tady anymone and happy.
+But then, she was an together. He ran to it, soft safe. The
+
+--- story 3 (stopped at 600 characters) ---
+The scientist looked at the data and his toys the treess. Tim and said, "Thank you, Mom?" Sam asked, "Mom, look!" Mia hare my bry they were both veryed. They both were sid to a lected happened. The little girl was harring to ran down.
+And yellow his pake and play together. They all was well or lunch.
+"That is your blake, he sunfor hoes."
+Mom and Lily were sad for the family and saw through hatter. They had a surprised and asked. They had a stick as so much fun blan. She thind on a small toung she you!" They said, "Okay, I want to see the box, make a little nexs and what they had lots of fun. Antw ken cap and the dog was to toys
+
+--- story 4 (ended on its own) ---
+The scientist looked at the data and hardable with his fast. He said, "No, it was happy to repeant it went to share with a started to race, but he was too surp boy named Tim orter and play with her boll.
+"Ary take. The mut a big bood to move. He had to go to her house.
+When they got home, soft meard in a start worked, please and yellow by the was drib. He had a friendly leabbig he ripet like. So, he was so share about the rabbit said, "You spretinged that a time, a gift meafone.
+
+================================================================================
+unfamiliar (out-of-distribution)
+prompt: 'In the year 3000, the city'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+In the year 3000, the city said, "Mom, was happy too. Max said, "Why is byind Max. Max was sad because she was shiny friendly squirrel said.
+They knew that they can pers and close. They had long was gone, so excited. She copour began to do. Max's mom hugged him and said, "It's okay, Jack, but it was very eath, steple give up and happy to set to seet with her liked to special the old of the true. She good to Mom. Lily wanted together mom and dresses. He wanted to pray in a small box.
+The ball with the sealls and day. They all laughed together."
+Anna was safe the tree weak to the started to go to the box ven sorewing he
+
+--- story 2 (stopped at 600 characters) ---
+In the year 3000, the city said. "He like it! They saw a green was surn. He at eack ior. Spot was so happy. Tim went to the water and his friends. Anna and his friends who shop and make a plan, and her bot it is for Sura tart." The little Mouse was so his mom and named Tom said your toys. She had dog for her sone. He toy, they play untilass the pretty and implork to wise ran named Mr. One day, Mum says cared on the gror squated out. Every day. One day, Tom sangy and wighed and said, "You move here, excited, the makingits mommy. They made he was something the wanted to fly hurt abd y,u trying and wanted to touch it.
+"Mo
+
+--- story 3 (stopped at 600 characters) ---
+In the year 3000, the city and her lots of pretend. She looked for the bug red the apper toys. She had her hag a watch me for helping looked at Sue.
+They closed the ball, blue band a spraned they were and took together. Tom hole has safe and said, and Tim worried to poke. They pulls soup around the star hall to said the song on the worl. He saw a big dog plays and laugh. They are not seed, "Mom are come all had a where are you? I bright thuir were sees to something applaul. He wanted to mattries for Mian waterman arainal. She wanted to make a mess had be bread. He was a briends, then, helping his family adventured toge
+
+--- story 4 (stopped at 600 characters) ---
+In the year 3000, the city said a snow his friend, Sue and her friends, and they stay bottle and wanted to play that it was still on the slar a big, red ball. Then, something unexpected happened. The monster saw the balls and her mom. She how they learned that bear had a wish yrun. She was scared and said, "I'm gain.
+"I had the knyck a soft nod who steat day. Tom looked me all big red ball was named grow that day but it all the voo. Max wanted to you hide!" Mia said.
+They had no made a big blue see the ball fly always help you.
+ He walk agre were sad. They say that it was a bird was not slels of the sabe. He ran after

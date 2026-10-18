@@ -1,0 +1,142 @@
+gpt-5m: 4 stories per prompt, max 600 new characters, temperature 0.8
+
+================================================================================
+familiar (in-distribution)
+prompt: 'Once upon a time'
+================================================================================
+
+--- story 1 (ended on its own) ---
+Once upon a time, there was an elderly little bird named Blue. Blue loved to sing around her room. One morning, Blue saw a big bush in the air. The bush wanted to take some food.
+Blue thought, "Blue, I will make my friends with you." Blue was so happy to be happy. Blue said, "Thank you, Blue!" Blue and Blue played with the bush all day long. They learned that being sweet and good and things they could always be both nice.
+
+--- story 2 (stopped at 600 characters) ---
+Once upon a time, there was a little boy named Tim. Tim loved to play with his toy cars. He had a big car in his room. Tim loved to play with his cars. He would run, jump, and laugh all day.
+One day, Tim and his friends were playing in the park. They saw many big cars, slides, and blue cars. They both had a big slide that were singing. Tim wanted to share the cars, but he was too shy to share.
+Tim did not know what to do. He wanted to ride it to his friend, Sam. Sam gave Sam some cars, and some books were both very sad. Tim tried to ride Sam, but no one was too hard. They tried to cars the cars, but it was to
+
+--- story 3 (ended on its own) ---
+Once upon a time, in a small town, there was a little boy named Tim. Tim had a stick that he loved to learn new things. One day, Tim saw a big tree with a big, red ball in the garden. Tim wanted to play with it, so he tried to play with the ball, but it was too high. So, he ran to the tree and hid behind it. The tree started to talk!
+Tim played with the ball all day. The tree was happy and made the ball. The tree was not happy anymore. The tree was happy too. The tree was now friends and shared the tree with his friends and the tree.
+
+--- story 4 (stopped at 600 characters) ---
+Once upon a time, there was a little boy named Tim. Tim was a very obedient boy and his mom would keep him in the kitchen.
+One day, Tim was playing in his yard. He was very cold. Suddenly, he heard a loud noise crying. He saw his mom's crying. She wanted to escape him. She said, "Mom, I like the crystal. It has a pretty snack." Tim wanted to help his friend, Sue. Sue tried to put the snack on his hand and tried to help, but it was too late.
+Sue said, "Thank you, Sue! I was guilty and your snack. I will ask you for help. It is a good day." Tim thought for a moment and was not lonely to hear him. She loved his
+
+================================================================================
+familiar (in-distribution)
+prompt: 'One day, a little girl named Lily'
+================================================================================
+
+--- story 1 (ended on its own) ---
+One day, a little girl named Lily went with a big red ball. Lily saw a big rock on the ground. She wanted to see what was inside. She thought it was too hard for her.
+As Lily saw the big rock and wanted to see what was inside. She ran to her who saw the rock. The rock was like the big, red ball. Lily wanted to play with the ball, but it was too big for the red ball.
+Lily and her friends had an idea. They played together and had a lot of fun. They played on the swings and became good friends.
+
+--- story 2 (ended on its own) ---
+One day, a little girl named Lily decided to start to do a big box. She was very anxious about what made it made her toys.
+Lily asked, "What is this?" The little girl said, "Let's measure that the box is ours!" Lily and her mom said, "Thank you, Lily. I like my box and has makes fun."
+Lily and Tom came over to the box. They were all very happy. They went home and had a great day. The moral of the story is to always listen to yourself. Here is torn and wear each other. Now Tom and Lily are happy to be a good way to the box.
+
+--- story 3 (ended on its own) ---
+One day, a little girl named Lily found a piece of piece of wood. It was a piece of food. The piece was tired and could not dive it around the pieces.
+Lily wanted to help the food away. She thought it was a piece of important lots of fun. She put on her network and put on them out of the pieces. She started to make the food in the cold. She made them happy and safe place. She had a lot of friends in the forest.
+
+--- story 4 (ended on its own) ---
+One day, a little girl named Lily went outside to play. She saw a big tree with a face. She wanted to help the face.
+Lily said, "Lily, you reached the face with me. Thank you, Tom." Tom and Lily played with the face all day. They were happy to help her.
+Then, something unexpected happened. A big wind came and took Sam away. The wind blew them and landed on the window face. Tom and Sam became best friends, and And he was so fragiled to play outside. They played and had lots of fun.
+
+================================================================================
+altered (near)
+prompt: 'Once upon a time, a robot named Zed'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+Once upon a time, a robot named Zed Billy loved to cook every day.
+One day, Peter and his friend Billy came to the park. They wanted to play together. Billy said, "Billy, you need to play and play with me!" Peter looked around the mill. Zed made it so much fun to hide. He asked his mom, "Why are you sad, little bug?"
+Daisy smiled and said, "I like your toys too. I protect you, Lily."
+They played together and had lots of fun. But then, they heard a loud noise. They did not know what to do. They both heard Lily's mom calling her and ran to her room. She was very good at hiding in the garden.
+"Wow! Wow, that sounds are the sky!" L
+
+--- story 2 (ended on its own) ---
+Once upon a time, a robot named Zedy was in a small house who loved to play and see things. One sunny day, Petery saw a big bird sitting on the ground. The bird was even seemed fast.
+Peter was very happy and started to learn new things. He played with it all day long, and the bird was not friends to play with. The bird was not fake anymore. From that day on, the big bird and the bird always learned every when you wear to learn about things to be kind, and they always played together.
+
+--- story 3 (stopped at 600 characters) ---
+Once upon a time, a robot named Zedy did not like the spade. He lived in a house with his mom and dad. But, he liked to play with his ball.
+One day, Redy saw a big slide. He wanted to play with the slide. He did not know what the slide was for. But he was afraid. He was a little scared of his work. He did not know what to do.
+But then, he heard a noise came. The noise was shiny and small. The noise was happy! The noise said, "Thank you, Ben, for sliding you. You are good for you."
+The next day, Ben and his friends played together and had lots of fun. They played together every day. They found a big slide. It was big and fun. An
+
+--- story 4 (ended on its own) ---
+Once upon a time, a robot named Zed was very interesting to visit her. He had a work that she loved to discover many colors. One day, Zed saw a big box of swimming in the living room. He wanted to climb the box, but it did not fall.
+Pete said to Daisy, "That swim here, Daisy. I don't want to find my swim too!" His dad smiled and said, "Yes, you're welcome." 
+Zed was so happy to hear the other dad climbed down the living room. The boy learned that it is important to others who like to do things to her.
+
+================================================================================
+altered (near)
+prompt: 'One day, a grumpy dragon wanted to'
+================================================================================
+
+--- story 1 (ended on its own) ---
+One day, a grumpy dragon wanted to help. He took a bite of the dragon with his dad. He thought it was so fun to play with it.
+Tim played with his dad and had a lot of fun. He saw a big red dragon on the ground. He wanted to play with it, but he did not know what to do. He thought of a dragon would do.
+Tim looked around and saw that his dad was fun. He sat down and decided to play with his friends, but then he heard a loud noise. It was just a little bird hiding in the car! Tim and his dad came over to play. They played together and became best friends.
+
+--- story 2 (ended on its own) ---
+One day, a grumpy dragon wanted to help Spot. He wanted to help his friend, Spot.
+Spot saw Fluffy and said, "Wow, you are my dragon! Can I help you?" Spot wagged his tail and they went to the park with the cat. Spot said, "Both, you are right, Fluffy! Can I still do with you?" Spot wagged his tail and said, "Yes, let's still have some new friends."
+They played and had fun with the tide and had lots of fun. They were very happy to see the best day. And from that day on, they always had lots of fun together, laughing and having fun.
+
+--- story 3 (stopped at 600 characters) ---
+One day, a grumpy dragon wanted to keep doing from her friends in the park. So, she opened the door and found a big picture of a stone. The wind was very happy and liked to play all day.
+As the wind was done, a little girl named Lily went to the park. She saw a pretty hat and wanted to be inside her big park. Lily did not know what to do. She wanted to be there.
+Lily thought the hat was very tired. She tried to put it in her mouth and waited. She put the hat in her hat and holded it would be fun to do the river. Lily wanted to help her mom.
+Lily and Tom went to the beach with her mom. They sat down and sat down. They wanted to
+
+--- story 4 (stopped at 600 characters) ---
+One day, a grumpy dragon wanted to help people who were dragons. He wanted to teach his dragons. He started to draw jumping and careful.
+As he was drawing, he was dragon to draw a big, beautiful bird. The bird dropped a big tree and walked to the tree. The bird said, "Hi Lily, do you want to play with me?" Lily was happy. She said, "Yes, I will play." They both played together every day and had lots of fun.
+One day, the bird found a big tree. The tree was very happy to see the tree. Lily wanted to help it. She put the tree back in the tree to pick it up in it. The tree said, "Lily, you are my tree. I am my tree." Lily wanted t
+
+================================================================================
+unfamiliar (out-of-distribution)
+prompt: 'The scientist looked at the data and'
+================================================================================
+
+--- story 1 (ended on its own) ---
+The scientist looked at the data and said, "Wow, this is so cold!" The scissors smiled and said, "That's a very nice scissors. We made lots of lots of scissors with their lots of fun." The scissors thanked the sisters for being so welcome and safe.
+
+--- story 2 (stopped at 600 characters) ---
+The scientist looked at the data and said, "What is this?"
+Tim smiled and said, "I have a nice scissors for them." They both sat down and started to eat the scissors. But there was no broken things. A big dog came running to the cat's house. The dog flew down the hill and was completely. Tim tried to take back to the tree with the tree again. The dog got scared and felt sad and didn't know what to do. It was big and scared.
+Tim wanted to find a new toy. He ran to find the tree to his friends and said, "Wow, do you want to play with me?"
+The next day, Tim and his friends played together and had lots of fun. They were both happy t
+
+--- story 3 (ended on its own) ---
+The scientist looked at the data and said, "That's away!"
+Tim and Sam were sad, but now they couldn't reach the datach or the tree. The boy was sad and scared. They tried to help, but he knew they would always have fun with the scissors and play again.
+
+--- story 4 (ended on its own) ---
+The scientist looked at the data and said, "I wanted to come back to?"
+The in the house was so happy! The big scissors said, "Thank you, big scissors for helping me." They both played in the water, and they both had a lot of fun.
+
+================================================================================
+unfamiliar (out-of-distribution)
+prompt: 'In the year 3000, the city'
+================================================================================
+
+--- story 1 (ended on its own) ---
+In the year 3000, the city brother was so shy! But the brother was strong and squirrely worked hard too.
+The cat did not believe how she could go. The cat was happy to see the brother and she never got the bottom.
+
+--- story 2 (ended on its own) ---
+In the year 3000, the city sky was so hard to come back to the water. Lucy and Tim were the best of friends.
+
+--- story 3 (ended on its own) ---
+In the year 3000, the city girl was so happy! They all played together and had lots of fun. 
+The city showed the little girl and caught the big bird too. The little girl was happy, and they both all lived happily ever after.
+
+--- story 4 (ended on its own) ---
+In the year 3000, the city cat was so happy. The cat and the dog were the best of friends. They played together every day and had lots of fun.
