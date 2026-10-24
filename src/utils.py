@@ -39,18 +39,22 @@ def size_label(max_chars):
     return "full" if max_chars is None else f"{max_chars / 1e6:g}m"
 
 
-def save_checkpoint(path, model, model_name, dataset, chars, block_size, step, max_chars):
+def param_label(n):
+    return f"{n / 1e3:.0f}k" if n < 1e6 else f"{n / 1e6:.1f}m"
+
+
+def run_name(model_name, n_params, block_size, max_chars):
+    # e.g. gpt-10.8m-c256-d50m: model, parameters, context length, training characters
+    context = 1 if model_name == "bigram" else block_size  # a bigram only ever looks at one character
+    return f"{model_name}-{param_label(n_params)}-c{context}-d{size_label(max_chars)}"
+
+
+def save_checkpoint(path, model, info, optimizer=None):
     path.parent.mkdir(parents=True, exist_ok=True)
-    torch.save({
-        "model_name": model_name,
-        "dataset": dataset,
-        "max_chars": max_chars,
-        "model_config": model.config(),
-        "state_dict": model.state_dict(),
-        "chars": chars,
-        "block_size": block_size,
-        "step": step,
-    }, path)
+    ckpt = {**info, "model_config": model.config(), "state_dict": model.state_dict()}
+    if optimizer is not None:
+        ckpt["optimizer"] = optimizer.state_dict()
+    torch.save(ckpt, path)
 
 
 def load_checkpoint(path, device):

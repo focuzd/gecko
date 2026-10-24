@@ -4,7 +4,7 @@ import math
 import torch
 
 from data import DATASETS, CharTokenizer, load_text, train_val_split
-from train import SEED, TRAIN_CONFIG, estimate_loss
+from train import CONFIGS, SEED, estimate_loss
 from utils import get_device, load_checkpoint, resolve_path
 
 SAMPLE_TOKENS = 500
@@ -15,7 +15,7 @@ def evaluate(path):
     device = get_device()
     model, ckpt = load_checkpoint(path, device)
     tok = CharTokenizer(ckpt["chars"])
-    cfg = TRAIN_CONFIG[ckpt["model_name"]]
+    cfg = ckpt.get("train_config") or CONFIGS[ckpt["model_name"]]
     print(f"loaded {path} ({ckpt['model_name']}, {ckpt['step']} steps, vocab size {len(tok)})")
 
     # same text and split as in training so val is still held out
@@ -37,6 +37,6 @@ def evaluate(path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("weights", nargs="?", default="weights/tinystories_gpt_5m.pt")
+    parser.add_argument("weights", nargs="?", default="weights/gpt-10.8m-c256-d5m.pt")
     args = parser.parse_args()
     evaluate(resolve_path(args.weights))

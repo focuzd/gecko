@@ -10,19 +10,18 @@ class Head(nn.Module):
         self.key = nn.Linear(n_embd, head_size, bias=False)
         self.query = nn.Linear(n_embd, head_size, bias=False)
         self.value = nn.Linear(n_embd, head_size, bias=False)
+        # not used by forward anymore, kept so older checkpoints still load
         self.register_buffer("tril", torch.tril(torch.ones(block_size, block_size)))
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, x):
-        B, T, C = x.shape
         k = self.key(x)
         q = self.query(x)
-        wei = q @ k.transpose(-2, -1) * k.shape[-1] ** -0.5  # (B, T, T)
-        wei = wei.masked_fill(self.tril[:T, :T] == 0, float("-inf"))
-        wei = F.softmax(wei, dim=-1)
-        wei = self.dropout(wei)
         v = self.value(x)
-        return wei @ v
+        # same as softmax(q @ k^T / sqrt(hs)) with a causal mask and dropout, then @ v,
+        # but fused into one kernel, which is a lot faster and uses less memory for long contexts
+        return F.scaled_dot_product_attention(q, k, v, is_causal=True,
+                                              dropout_p=self.dropout.p if self.training else 0.0)
 
 
 class MultiHeadAttention(nn.Module):

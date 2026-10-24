@@ -17,13 +17,14 @@ RESULT_FILE = BENCH_DIR / "result.md"
 STORY_DIR = BENCH_DIR / "stories"
 STORIES_FILE = BENCH_DIR / "stories.jsonl"
 
-# name in the results -> weights file, the suffix is how many characters it was trained on
-MODELS = {
-    "bigram": "tinystories_bigram_5m.pt",
-    "mlp": "tinystories_mlp_5m.pt",
-    "gpt-5m": "tinystories_gpt_5m.pt",
-    "gpt-50m": "tinystories_gpt_50m.pt",
-}
+# run names as written by train.py (<model>-<params>-c<context>-d<training chars>), each in weights/<name>.pt
+MODELS = {name: f"{name}.pt" for name in [
+    "bigram-7k-c1-d5m",
+    "mlp-439k-c32-d5m",
+    "gpt-10.8m-c256-d5m",
+    "gpt-10.8m-c256-d50m",
+]}
+BASELINE_5M = "gpt-10.8m-c256-d5m"
 
 GROUP_NAMES = {
     "in": "familiar (in-distribution)",
@@ -264,15 +265,16 @@ def report():
 
     # each model is checked against its own training data, the controls against the 5m data
     train = {src: training_data_for(w) for src, w in MODELS.items()}
-    train["reference"] = train["random"] = training_data_for(MODELS["gpt-5m"])
+    train["reference"] = train["random"] = training_data_for(MODELS[BASELINE_5M])
     metrics = {sid: auto_metrics(s, train[s["source"]]) for sid, s in stories.items()}
 
     sections = ["# Benchmark results",
                 f"{STORIES_PER_PROMPT} stories per prompt, {len(all_prompts())} prompts, "
-                f"max {MAX_NEW_CHARS} new characters, temperature {TEMPERATURE}. "
-                "The suffix is how many TinyStories characters a model was trained on: bigram, mlp and "
-                "gpt-5m saw the first 5 million (validation split), gpt-50m the first 50 million of the "
-                "train split. Both GPTs have the same architecture (10.8M parameters) and 5000 training steps.",
+                f"max {MAX_NEW_CHARS} new characters, temperature {TEMPERATURE}.",
+                "Model names are `<model>-<parameters>-c<context length>-d<training characters>`, e.g. "
+                "`gpt-10.8m-c256-d50m` is a 10.8M parameter GPT that sees 256 characters at a time, trained "
+                "on 50 million characters. d5m models used the TinyStories validation split, d50m models the "
+                "train split. All GPTs were trained for 5000 steps on the same number of characters per step.",
                 HOW_TO_READ.strip()]
 
     by_source = defaultdict(list)

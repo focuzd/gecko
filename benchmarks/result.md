@@ -1,6 +1,8 @@
 # Benchmark results
 
-4 stories per prompt, 6 prompts, max 600 new characters, temperature 0.8. The suffix is how many TinyStories characters a model was trained on: bigram, mlp and gpt-5m saw the first 5 million (validation split), gpt-50m the first 50 million of the train split. Both GPTs have the same architecture (10.8M parameters) and 5000 training steps.
+4 stories per prompt, 6 prompts, max 600 new characters, temperature 0.8.
+
+Model names are `<model>-<parameters>-c<context length>-d<training characters>`, e.g. `gpt-10.8m-c256-d50m` is a 10.8M parameter GPT that sees 256 characters at a time, trained on 50 million characters. d5m models used the TinyStories validation split, d50m models the train split. All GPTs were trained for 5000 steps on the same number of characters per step.
 
 ## How to read this
 
@@ -31,10 +33,10 @@
 
 | source | real word rate | distinct-2 | ended on its own | longest copied span (words) |
 |---|---|---|---|---|
-| bigram | 0.36 ± 0.04 | 1.00 ± 0.01 | 0.00 ± 0.00 | 0.00 ± 0.00 |
-| mlp | 0.90 ± 0.03 | 0.97 ± 0.02 | 0.46 ± 0.51 | 1.29 ± 3.62 |
-| gpt-5m | 0.99 ± 0.01 | 0.91 ± 0.06 | 0.71 ± 0.46 | 8.00 ± 5.81 |
-| gpt-50m | 0.99 ± 0.01 | 0.91 ± 0.06 | 0.71 ± 0.46 | 7.79 ± 4.64 |
+| bigram-7k-c1-d5m | 0.36 ± 0.04 | 1.00 ± 0.01 | 0.00 ± 0.00 | 0.00 ± 0.00 |
+| mlp-439k-c32-d5m | 0.90 ± 0.03 | 0.97 ± 0.02 | 0.46 ± 0.51 | 1.29 ± 3.62 |
+| gpt-10.8m-c256-d5m | 0.99 ± 0.01 | 0.91 ± 0.06 | 0.71 ± 0.46 | 8.00 ± 5.81 |
+| gpt-10.8m-c256-d50m | 0.99 ± 0.01 | 0.91 ± 0.06 | 0.71 ± 0.46 | 7.79 ± 4.64 |
 | reference | 1.00 ± 0.01 | 0.91 ± 0.05 | 0.33 ± 0.49 | 8.75 ± 4.92 |
 | random | 0.08 ± 0.02 | 1.00 ± 0.00 | 0.00 ± 0.00 | 0.00 ± 0.00 |
 
@@ -44,10 +46,10 @@ Claude Haiku 5.5, run as Claude Code subagents: one fresh agent per story, same 
 
 | source | n | spelling | grammar | consistency | prompt_following | structure | meaning | style | weighted | normalised |
 |---|---|---|---|---|---|---|---|---|---|---|
-| bigram | 24 | 1.00 ± 0.00 | 1.00 ± 0.00 | 1.00 ± 0.00 | 1.92 ± 0.28 | 1.00 ± 0.00 | 1.00 ± 0.00 | 1.08 ± 0.28 | 1.12 ± 0.05 | 0 |
-| mlp | 24 | 1.58 ± 0.50 | 1.79 ± 0.41 | 1.62 ± 0.49 | 2.12 ± 0.34 | 1.75 ± 0.44 | 1.12 ± 0.34 | 2.00 ± 0.00 | 1.68 ± 0.22 | 18 |
-| gpt-5m | 24 | 4.04 ± 0.86 | 2.62 ± 0.71 | 2.08 ± 0.72 | 2.67 ± 0.76 | 2.04 ± 0.46 | 1.83 ± 0.48 | 3.29 ± 0.69 | 2.54 ± 0.43 | 45 |
-| gpt-50m | 24 | 4.04 ± 1.00 | 2.67 ± 0.56 | 1.96 ± 0.62 | 2.75 ± 0.85 | 2.12 ± 0.45 | 1.88 ± 0.34 | 3.29 ± 0.55 | 2.55 ± 0.36 | 46 |
+| bigram-7k-c1-d5m | 24 | 1.00 ± 0.00 | 1.00 ± 0.00 | 1.00 ± 0.00 | 1.92 ± 0.28 | 1.00 ± 0.00 | 1.00 ± 0.00 | 1.08 ± 0.28 | 1.12 ± 0.05 | 0 |
+| mlp-439k-c32-d5m | 24 | 1.58 ± 0.50 | 1.79 ± 0.41 | 1.62 ± 0.49 | 2.12 ± 0.34 | 1.75 ± 0.44 | 1.12 ± 0.34 | 2.00 ± 0.00 | 1.68 ± 0.22 | 18 |
+| gpt-10.8m-c256-d5m | 24 | 4.04 ± 0.86 | 2.62 ± 0.71 | 2.08 ± 0.72 | 2.67 ± 0.76 | 2.04 ± 0.46 | 1.83 ± 0.48 | 3.29 ± 0.69 | 2.54 ± 0.43 | 45 |
+| gpt-10.8m-c256-d50m | 24 | 4.04 ± 1.00 | 2.67 ± 0.56 | 1.96 ± 0.62 | 2.75 ± 0.85 | 2.12 ± 0.45 | 1.88 ± 0.34 | 3.29 ± 0.55 | 2.55 ± 0.36 | 46 |
 | reference | 12 | 5.00 ± 0.00 | 4.42 ± 0.51 | 4.58 ± 0.51 | 4.75 ± 0.45 | 3.50 ± 0.52 | 3.75 ± 0.45 | 4.25 ± 0.45 | 4.25 ± 0.29 | 100 |
 | random | 6 | 1.00 ± 0.00 | 1.00 ± 0.00 | 1.00 ± 0.00 | 2.00 ± 0.00 | 1.00 ± 0.00 | 1.00 ± 0.00 | 1.00 ± 0.00 | 1.12 ± 0.00 | 0 |
 
@@ -61,7 +63,7 @@ How well each model holds up as the opening text gets less like the training dat
 
 | model | overall | familiar (in-distribution) | altered (near) | unfamiliar (out-of-distribution) |
 |---|---|---|---|---|
-| bigram | 0 | 0 | 0 | 0 |
-| mlp | 18 | 14 | 18 | 21 |
-| gpt-5m | 45 | 52 | 38 | 46 |
-| gpt-50m | 46 | 49 | 39 | 49 |
+| bigram-7k-c1-d5m | 0 | 0 | 0 | 0 |
+| mlp-439k-c32-d5m | 18 | 14 | 18 | 21 |
+| gpt-10.8m-c256-d5m | 45 | 52 | 38 | 46 |
+| gpt-10.8m-c256-d50m | 46 | 49 | 39 | 49 |
