@@ -43,10 +43,10 @@ def param_label(n):
     return f"{n / 1e3:.0f}k" if n < 1e6 else f"{n / 1e6:.1f}m"
 
 
-def run_name(model_name, n_params, block_size, max_chars):
-    # e.g. gpt-10.8m-c256-d50m: model, parameters, context length, training characters
+def run_name(model_name, n_params, block_size, max_chars, batch_size):
+    # e.g. gpt-10.8m-c256-d50m-b64: model, parameters, context length, training characters, batch size
     context = 1 if model_name == "bigram" else block_size  # a bigram only ever looks at one character
-    return f"{model_name}-{param_label(n_params)}-c{context}-d{size_label(max_chars)}"
+    return f"{model_name}-{param_label(n_params)}-c{context}-d{size_label(max_chars)}-b{batch_size}"
 
 
 def save_checkpoint(path, model, info, optimizer=None):

@@ -10,6 +10,7 @@ import torch
 from data import DATASETS, CharTokenizer, load_text
 from judge import CRITERIA, Judge, QuotaExhausted
 from sample_stories import END_MARKER, generate_story
+from train import CONFIGS
 from utils import ROOT, WEIGHTS_DIR, get_device, load_checkpoint, resolve_path
 
 BENCH_DIR = ROOT / "benchmarks"
@@ -17,14 +18,15 @@ RESULT_FILE = BENCH_DIR / "result.md"
 STORY_DIR = BENCH_DIR / "stories"
 STORIES_FILE = BENCH_DIR / "stories.jsonl"
 
-# run names as written by train.py (<model>-<params>-c<context>-d<training chars>), each in weights/<name>.pt
+# run names as written by train.py (<model>-<params>-c<context>-d<training chars>-b<batch>), each in weights/<name>.pt
 MODELS = {name: f"{name}.pt" for name in [
-    "bigram-7k-c1-d5m",
-    "mlp-439k-c32-d5m",
-    "gpt-10.8m-c256-d5m",
-    "gpt-10.8m-c256-d50m",
-    "gpt-10.9m-c512-d50m",
-    "gpt-19.3m-c512-d50m",
+    "bigram-7k-c1-d5m-b32",
+    "mlp-439k-c32-d5m-b64",
+    "gpt-10.8m-c256-d5m-b64",
+    "gpt-10.8m-c256-d50m-b64",
+    "gpt-10.9m-c512-d50m-b32",
+    "gpt-19.3m-c512-d50m-b32",
+    "gpt-10.9m-c512-d50m-b64",
 ]}
 
 GROUP_NAMES = {
@@ -95,7 +97,8 @@ def model_stories(name, weights_path, device):
     model, ckpt = load_checkpoint(weights_path, device)
     tok = CharTokenizer(ckpt["chars"])
     # stored with every story so the report knows the training data without needing the weights
-    data = dict(dataset=ckpt["dataset"], max_chars=ckpt.get("max_chars") or DATASETS[ckpt["dataset"]]["max_chars"])
+    data = dict(dataset=ckpt["dataset"], max_chars=ckpt.get("max_chars") or DATASETS[ckpt["dataset"]]["max_chars"],
+                **training_setup(ckpt))
     stories = []
     for p, (group, prompt) in enumerate(all_prompts()):
         dropped = set(prompt) - set(tok.chars)
@@ -229,6 +232,19 @@ class TrainingData:
         return " " + " ".join(seq) + " " in self.joined
 
 
+def training_setup(ckpt):
+    cfg = ckpt.get("train_config") or CONFIGS[ckpt["model_name"]]
+    n_params = ckpt.get("n_params") or sum(v.numel() for k, v in ckpt["state_dict"].items() if not k.endswith("tril"))
+    return dict(n_params=n_params, block_size=ckpt["block_size"], batch_size=cfg["batch_size"], steps=ckpt["step"])
+
+
+def setup_for(story):
+    if "batch_size" in story:
+        return {k: story[k] for k in ("n_params", "block_size", "batch_size", "steps", "max_chars")}
+    ckpt = torch.load(WEIGHTS_DIR / MODELS[story["source"]], map_location="cpu", weights_only=True)
+    return dict(training_setup(ckpt), max_chars=data_key(story)[1])
+
+
 def data_key(story):
     if "dataset" in story:
         return story["dataset"], story["max_chars"]
@@ -312,12 +328,23 @@ def report():
     sections = ["# Benchmark results",
                 f"{STORIES_PER_PROMPT} stories per prompt, {len(all_prompts())} prompts, "
                 f"max {MAX_NEW_CHARS} new characters, temperature {TEMPERATURE}.",
-                "Model names are `<model>-<parameters>-c<context length>-d<training characters>`, e.g. "
-                "`gpt-10.8m-c256-d50m` is a 10.8M parameter GPT that sees 256 characters at a time, trained "
-                "on 50 million characters. d5m models used the TinyStories validation split, d50m models the "
-                "train split. All GPTs were trained for 5000 steps with 16,384 characters per step (64 x 256 or "
-                "32 x 512), except names ending in `-b<N>`, which used batch N (e.g. -b64 at c512 = 32,768 per step).",
+                "Model names are `<model>-<parameters>-c<context length>-d<training characters>-b<batch size>`, "
+                "e.g. `gpt-10.8m-c256-d50m-b64` is a 10.8M parameter GPT that sees 256 characters at a time, "
+                "trained on 50 million characters with 64 sequences per step. d5m models used the TinyStories "
+                "validation split, d50m models the train split.",
                 HOW_TO_READ.strip()]
+
+    # how each model was trained, so batch size and amount of training are visible next to the scores
+    rows = []
+    for src in models:
+        st = setup_for(first[src])
+        per_step = st["batch_size"] * st["block_size"]
+        rows.append([src, f"{st['n_params'] / 1e6:.2f}M", st["block_size"], st["batch_size"],
+                     f"{per_step:,}", st["steps"], f"{per_step * st['steps'] / 1e6:.0f}M",
+                     f"{st['max_chars'] / 1e6:g}M"])
+    sections.append("## Training setup\n\n" + table(
+        ["model", "parameters", "context", "batch size", "chars per step", "steps", "chars seen", "dataset size"],
+        rows))
 
     by_source = defaultdict(list)
     for sid, m in metrics.items():

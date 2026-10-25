@@ -1,4 +1,4 @@
-bigram-7k-c1-d5m: 4 stories per prompt, max 600 new characters, temperature 0.8
+bigram-7k-c1-d5m-b32: 4 stories per prompt, max 600 new characters, temperature 0.8
 
 ================================================================================
 familiar (in-distribution)

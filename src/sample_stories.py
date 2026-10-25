@@ -34,7 +34,7 @@ def generate_story(model, tok, block_size, prompt, max_new_tokens, temperature=1
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--weights", default="weights/gpt-10.8m-c256-d5m.pt")
+    parser.add_argument("--weights", default="weights/gpt-10.8m-c256-d5m-b64.pt")
     parser.add_argument("--prompt", default="Once upon a time")
     parser.add_argument("--num-stories", type=int, default=3)
     parser.add_argument("--max-new-tokens", type=int, default=2000)

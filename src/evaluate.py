@@ -37,6 +37,6 @@ def evaluate(path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("weights", nargs="?", default="weights/gpt-10.8m-c256-d5m.pt")
+    parser.add_argument("weights", nargs="?", default="weights/gpt-10.8m-c256-d5m-b64.pt")
     args = parser.parse_args()
     evaluate(resolve_path(args.weights))

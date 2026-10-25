@@ -59,7 +59,6 @@ def train(dataset, config_name, max_chars=None, block_size=None, batch_size=None
     use_amp = amp and device.type == "cuda"
     if amp and not use_amp:
         print("--amp needs a CUDA GPU, training in fp32")
-    batch_size_arg = batch_size
     cfg = make_config(config_name, block_size, batch_size, max_iters)
     block_size, batch_size = cfg["block_size"], cfg["batch_size"]
 
@@ -74,9 +73,7 @@ def train(dataset, config_name, max_chars=None, block_size=None, batch_size=None
         model_args["block_size"] = block_size
     model = MODELS[cfg["model"]](**model_args).to(device)
     n_params = sum(p.numel() for p in model.parameters())
-    name = run_name(cfg["model"], n_params, block_size, max_chars)
-    if batch_size_arg:
-        name += f"-b{batch_size}"  # only when it was set by hand, the default keeps chars per step fixed
+    name = run_name(cfg["model"], n_params, block_size, max_chars, batch_size)
     if use_amp:
         name += "-fp16"
     print(f"{name}: {n_params / 1e6:.2f}M parameters, batch {batch_size} x {block_size}, "

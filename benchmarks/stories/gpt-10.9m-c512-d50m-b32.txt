@@ -1,4 +1,4 @@
-gpt-10.9m-c512-d50m: 4 stories per prompt, max 600 new characters, temperature 0.8
+gpt-10.9m-c512-d50m-b32: 4 stories per prompt, max 600 new characters, temperature 0.8
 
 ================================================================================
 familiar (in-distribution)
