@@ -1,0 +1,145 @@
+gpt-10.9m-c512-d50m: 4 stories per prompt, max 600 new characters, temperature 0.8
+
+================================================================================
+familiar (in-distribution)
+prompt: 'Once upon a time'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+Once upon a time, there was a little girl named Lily. She always had a big pot. She loved to play with the pot on her favorite cake. One day, Lily went to the pot and saw a big see. She wanted to go on the see to play with it.
+The see met Tom come out of the see and said, "Let's go to the see and play together!" Lily smiled and said, "Okay, but please don't go anymore." Tom was very surprised. He said, "Thank you, Lily, for the seek and gentle." Lily smiled and gave the seed. She had a big hug and a hug.
+Tom was very happy to play too. He said, "I am glad you got the seed and make you go home. Let's go home a
+
+--- story 2 (stopped at 600 characters) ---
+Once upon a time, in a small town, there was a little girl named Lily. She loved to touch outside and play with her toys. One day, while playing, Lily saw a big tree. She wanted to go to the tree and show it to her mom, too.
+"Lily, you can go to the tree and be scared. We can have a big ball." Lily said.
+"I will have some ball," mom said.
+"You can say sorry, Lily. But you have to go to the tree," Lily said.
+"I will go to the tree," Tom said.
+"We will be a big cold. They are small and smart. They put them in the tree," Lily said.
+They got the ball and turned it. They knew that the ball was special. They both s
+
+--- story 3 (ended on its own) ---
+Once upon a time, there was a little playful lion. The playful cat was happy with his friends. They all liked to play together.
+One day, the playful cat was playing in the park. The cat wanted to play with the playful cat, so the playful cat did not alone. The playful cat was very cheap and said, "I wanted to play with you, playful lion."
+The playful cat did not want to play with the playful cat. The shark cat wanted the playful cat too. The playful cat and the playful cat were sad. They decided to play together in the park every day.
+
+--- story 4 (stopped at 600 characters) ---
+Once upon a time, there was a little fish named Fin. Fin loved to eat fruits. He would drive around and play with his friends. One day, Tom dress wanted to take a bald with his friends.
+Tom went to his house with his mom. He saw Fin had a big wing from the bald. Tom wanted to take Fin, but he liked his friends to get eating him. Tom showed Fin the bald wing and said, "Don't worry, Tom. I will wake you." So, Tom asked Fin, "Yes, I will take you!" Fin clapped Fin and said, "Tom, I will get to fix you anymore."
+Fin and Fin became best friends. They were happy and played together even in the spot. And they lived
+
+================================================================================
+familiar (in-distribution)
+prompt: 'One day, a little girl named Lily'
+================================================================================
+
+--- story 1 (ended on its own) ---
+One day, a little girl named Lily found a big, shiny cake. She was very happy and proud of her toy cake.
+The end.
+
+--- story 2 (stopped at 600 characters) ---
+One day, a little girl named Lily went to the park. She saw a ball with shiny and long and not think she could talk. She wanted to be more careful with it. So, she tried to reach the ball, but it went to her way.
+Lily saw a big tree with a big, beautiful ball. The ball was scared, but her mom went to the park to show her friend, Tim. She was scared, but she stopped reach the ball with her new blanket. She did not like the ball anymore. She was happy and fruited.
+But Lily did not listen. She was scared and scared. She did not like Lily angry. She did not like Tim anymore. She was scared. She did not listen. She wanted to be mo
+
+--- story 3 (ended on its own) ---
+One day, a little girl named Lily went to the store with her mom. She saw a little girl with a pink box on it. The little girl was very happy. She thought it was a big, happy little girl who wanted to play with it.
+Lily asked her mom if he could play with the little girl named Sue. She said, "What is the little girl, Bunny?" 
+The little girl smiled and said, "It is my friend, Tom. I want to play with your toy box. It is so pretty and has a ball. And you are lying to play with it. The little girl was making her friends. They all had a lot of fun.
+
+--- story 4 (ended on its own) ---
+One day, a little girl named Lily went to the park with her mom. They saw the rain and wanted to chase it.
+Lily felt sorry for the rain. She wanted to have it with her friends. She thought it was a magic rain. She picked it up and saw the rain started to put it on a bench. The rain had an idea. Lily cried. She said, "Lily, you can't chase the rain. We can chase the rain."
+Mom said, "Yes, Lily, you can try to chase the rain. You can do it again. Now, please me do your rain. You can put this rain in the rain. It is a shiny rain. It has no friends and the rain. They all played together and had fun.
+
+================================================================================
+altered (near)
+prompt: 'Once upon a time, a robot named Zed'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+Once upon a time, a robot named Zed was playing with his toy car in the sky. Zed loved to play with his toy car. One day, Zed's mom told him, "Please do you want to play with me?" Zed thought about it and said, "Okay, Zed, let's play with the car and your toy car do."
+Zed took the car and started to play with the car on the swings. But the car did not want to have a car to play with. Zed and Zed was scared and flew to the car. When Zed showed Zed Ged, "What do you want to play with that?" Zed said, "I want to play with you, Red next time." Zed thought for a moment and said, "You can play with me, Zed. We can play with you."
+Ged
+
+--- story 2 (stopped at 600 characters) ---
+Once upon a time, a robot named Zedress. Zedress lived in a small house with his friends. Zedress had a big, shiny dress that he loved to explore them.
+One day, Zedress he was walking in the sky. He found a big plate of leaves. He wanted to find some food. He saw a big, yard box on the sky. He walked over to the either animals. He was very happy and said, "I will explore you." Zedress found a big ball. He said, "You can play with a food to play with my food."
+But Zedress didn't want to play with the ball. They went on a big tree and hid under a tree. Zedress could do anything yething. They laughed and talked. They had fun playi
+
+--- story 3 (stopped at 600 characters) ---
+Once upon a time, a robot named Zedress. Zedress was a big tap of leaves on the floor. She was a big bunny for a walk on her face. She saw that Zedress was in the fort and ran to her friend, Sam.
+"Tim, I am Cheese!" said Tim. "Do you want to play with me?" The bunny smiled. "Yes, I want to play with you." They played with the leaves all day.
+Tim and Sam went to school. They saw a tap with a block toy. They sat down and went to the fort to play. They found a big red ball. Tim wanted to help the ball, so Sam put them on the tap. He tried to be in the water and did not want to play with Sam anymore, and they were both happy.
+The b
+
+--- story 4 (stopped at 600 characters) ---
+Once upon a time, a robot named Zedre was playing with his friends. Zere had a big box while Zerry said, "Don't worry, Redress. It's a friend who loved to play with me." Zerry was very happy to play with his friends.
+But Zerry said, "Stop stop stop and smiles. Then I forgot to find my box." Kerry thought about the friends and held it in his box. They went to his friends in the park. They said, "You should never see something else."
+Kerry smiled and said, "I love you too, Zerry. It is very little and shiny. I show you to meet Drky said. He is a good idea. He learned that sometimes, you can be a new friend. Do you want to teach m
+
+================================================================================
+altered (near)
+prompt: 'One day, a grumpy dragon wanted to'
+================================================================================
+
+--- story 1 (ended on its own) ---
+One day, a grumpy dragon wanted to pretend the dragon to find the most fish. A boy named Tim wanted to help his mom.
+Tim had an idea. He said, "No, I want to pretend to be more special." His mom told him to receive the most fish and the most fish about what he was special. The most fish spin and the special most pecial. The dragon stopped balance and became friends.
+
+--- story 2 (stopped at 600 characters) ---
+One day, a grumpy dragon wanted to play with the ball. She did not know how, but she was too far.
+The ball was sad. She went to the store and saw that the ball was for her friend. They were very sad. They went back to the park to play with their ball. The ball said, "Don't worry, Lily! We will help you play with the ball." The ball was sad and said, "I will help you."
+The ball said, "Hello, I lost my ball and I can't." Lily said, "Thank you, ball. I'm sad. I'm sorry I could make you play with your ball."
+The ball stopped kind and said, "You're welcome, but I don't want to be part. I will be part and fly too. You can't play wit
+
+--- story 3 (ended on its own) ---
+One day, a grumpy dragon wanted to keep him walking. The dragon was nice and shiny. He was very happy.
+The dragon saw a big pretty sound in a tree and tried to reach it. It jumped in the tree and pushed it around. The dragon tried to open the sound and the dragon started to shake. But the dragon was too late. He wanted to shake it with the dragon, but he still was not safe. He was scared, but he did not know that to dragon his way. He said, "Mom, to shake the dragon, and now the dragon." They hugged the dragon and played together with the dragon's way to shake.
+
+--- story 4 (ended on its own) ---
+One day, a grumpy dragon wanted to drive any food. So, it ran around the store to eat. One day, there were many cookies to go. It was a big tree. Lily wanted to see the cookies in the sky.
+Lily took the cookie and put it in the sky. The cookies were happy. The cookies were very happy and thanked Lily. But the cookies were not a tree. It did not see that examine. It had a face anymore. The cookies was sad.
+Lily said, "Thank you, cookie, cookies!" The cookies went back to Lily's cookies for her. Lily was so happy and thanked Lily. She said, "I know you are free!"
+
+================================================================================
+unfamiliar (out-of-distribution)
+prompt: 'The scientist looked at the data and'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+The scientist looked at the data and the words were strong. The scient looked very sad. The scient looked at the scient toy car and the visit was sad.
+The scient looked at its mom and dad could not scien to make the most scient. The cloud looked at the scient and said, "Hello, cat! Can I have your toy car?" The scient looked down and said, "Yes, I will help you. Let's come back to the top."
+The scient said, "We can find your toy car for you! We can have to catch it for you."
+The sciss smiled and said, "Thank you, scissient. The toy car is now fairy too. It is not fairy and caried. You are friends."
+They went to the top of the to
+
+--- story 2 (ended on its own) ---
+The scientist looked at the data and asked, "What does you want to see?"
+Max needed the data to help the data. He asked, "What does you want to see?" The data said, "I can see the data and I want to help you."
+The data was worried, but he reached the data and smiled as he had left. Even though for a moment and thanked the data for dinner the dad. When Max got home, he was very so happy! He learned to see that it was too late. And from that day on, Tim always helped him find any day for being so kind to play with the date.
+
+--- story 3 (ended on its own) ---
+The scientist looked at the data and said he would show the branch with the free cat. The scient looked at Tom and said, "I will show you how to show you how to show me."
+Tom and Lily played in the sciss all day long. They played catch with the branch and shared the rabbit with the branch. The sciss liked to show the rabbit to Lily. They were very happy and learned that being scared, excited to show the rabbit how to go to the rabbit.
+
+--- story 4 (ended on its own) ---
+The scientist looked at the data and saw that the window could be. Sara looked at the ball and said, "Thank you, Tom!" Tom was sad that Sara's ball and smiled. So, Sara and Tom decided to be careful with their friends. They went to the park and said sorry to eat them. Sara was happy that Tom would be careful with his bike. They shared the ball with the ball, happy that Tom had good and make fun at the day.
+
+================================================================================
+unfamiliar (out-of-distribution)
+prompt: 'In the year 3000, the city'
+================================================================================
+
+--- story 1 (ended on its own) ---
+In the year 3000, the city mouse needed to see what the bitter was not hungry. It said, "Thank you for helping me. You are a good friend." After a while, the city mouse came to help the mouse find a big smile. The mouse was ready to keep the mouse better.
+
+--- story 2 (ended on its own) ---
+In the year 3000, the city and the little girl were surprised. The cat was curious. It could not fly anymore. The city and the city and the city and the city and the funny city. The city saw the city and the city and the breat party. They were sad because they could not fly anymore.
+
+--- story 3 (ended on its own) ---
+In the year 3000, the city flower felt bad for him. The big surprise flew away and wanted to play with the surprise. Tim felt bad for the big surprise to see his friends. He saw the big surprise and was proud of his friends. They started to make the surprise flew away. Tim was happy to see his friends to see his friends.
+
+--- story 4 (ended on its own) ---
+In the year 3000, the city thing. The city knew she was still a new place even morning on the big swing.

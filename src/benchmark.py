@@ -23,6 +23,7 @@ MODELS = {name: f"{name}.pt" for name in [
     "mlp-439k-c32-d5m",
     "gpt-10.8m-c256-d5m",
     "gpt-10.8m-c256-d50m",
+    "gpt-10.9m-c512-d50m",
 ]}
 BASELINE_5M = "gpt-10.8m-c256-d5m"
 
