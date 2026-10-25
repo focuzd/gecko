@@ -7,10 +7,10 @@ from collections import Counter, defaultdict
 
 import torch
 
-from data import CharTokenizer, load_text
+from data import DATASETS, CharTokenizer, load_text
 from judge import CRITERIA, Judge, QuotaExhausted
 from sample_stories import END_MARKER, generate_story
-from utils import ROOT, WEIGHTS_DIR, get_device, load_checkpoint
+from utils import ROOT, WEIGHTS_DIR, get_device, load_checkpoint, resolve_path
 
 BENCH_DIR = ROOT / "benchmarks"
 RESULT_FILE = BENCH_DIR / "result.md"
@@ -26,7 +26,6 @@ MODELS = {name: f"{name}.pt" for name in [
     "gpt-10.9m-c512-d50m",
     "gpt-19.3m-c512-d50m",
 ]}
-BASELINE_5M = "gpt-10.8m-c256-d5m"
 
 GROUP_NAMES = {
     "in": "familiar (in-distribution)",
@@ -92,28 +91,42 @@ def train_split_text():
     return text[:n], text[n:]
 
 
-def generate():
+def model_stories(name, weights_path, device):
+    model, ckpt = load_checkpoint(weights_path, device)
+    tok = CharTokenizer(ckpt["chars"])
+    # stored with every story so the report knows the training data without needing the weights
+    data = dict(dataset=ckpt["dataset"], max_chars=ckpt.get("max_chars") or DATASETS[ckpt["dataset"]]["max_chars"])
+    stories = []
+    for p, (group, prompt) in enumerate(all_prompts()):
+        dropped = set(prompt) - set(tok.chars)
+        if dropped:
+            print(f"warning: {prompt!r} has characters the model doesn't know: {dropped}")
+        for k in range(STORIES_PER_PROMPT):
+            torch.manual_seed(1000 * p + k)  # same seeds for every model
+            text, ended = generate_story(model, tok, ckpt["block_size"], prompt, MAX_NEW_CHARS, TEMPERATURE)
+            stories.append(dict(id=f"{name}-{p}-{k}", source=name, group=group,
+                                prompt=prompt, text=text, ended=ended, **data))
+        print(f"{name}: done with {prompt!r}")
+    return stories
+
+
+def generate(weights=None, out=None):
     BENCH_DIR.mkdir(parents=True, exist_ok=True)
     device = get_device()
+
+    if weights:
+        # a single model, e.g. on Kaggle right after training; bring the file back and run `import`
+        path = resolve_path(weights)
+        out = resolve_path(out) if out else BENCH_DIR / f"stories_{path.stem}.jsonl"
+        write_jsonl(out, model_stories(path.stem, path, device))
+        print(f"saved to {out}, run `python src/benchmark.py import {out}` where the benchmark lives")
+        return
+
     stories = load_jsonl(STORIES_FILE) if STORIES_FILE.exists() else []
     have = {s["source"] for s in stories}
-
-    for model_name, weights in MODELS.items():
-        if model_name in have:
-            continue
-        model, ckpt = load_checkpoint(WEIGHTS_DIR / weights, device)
-        tok = CharTokenizer(ckpt["chars"])
-        for p, (group, prompt) in enumerate(all_prompts()):
-            dropped = set(prompt) - set(tok.chars)
-            if dropped:
-                print(f"warning: {prompt!r} has characters the model doesn't know: {dropped}")
-            for k in range(STORIES_PER_PROMPT):
-                torch.manual_seed(1000 * p + k)  # same seeds for every model
-                text, ended = generate_story(model, tok, ckpt["block_size"], prompt,
-                                             MAX_NEW_CHARS, TEMPERATURE)
-                stories.append(dict(id=f"{model_name}-{p}-{k}", source=model_name, group=group,
-                                    prompt=prompt, text=text, ended=ended))
-            print(f"{model_name}: done with {prompt!r}")
+    for name, weights_file in MODELS.items():
+        if name not in have:
+            stories += model_stories(name, WEIGHTS_DIR / weights_file, device)
 
     if "reference" in have:
         save_stories(stories)
@@ -140,11 +153,24 @@ def generate():
     save_stories(stories)
 
 
+def write_jsonl(path, rows):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        for r in rows:
+            f.write(json.dumps(r) + "\n")
+
+
 def save_stories(stories):
-    with open(STORIES_FILE, "w", encoding="utf-8") as f:
-        for s in stories:
-            f.write(json.dumps(s) + "\n")
+    write_jsonl(STORIES_FILE, stories)
     print(f"saved {len(stories)} stories to {STORIES_FILE}")
+
+
+def import_stories(path):
+    stories = load_jsonl(STORIES_FILE)
+    have = {s["id"] for s in stories}
+    new = [s for s in load_jsonl(resolve_path(path)) if s["id"] not in have]
+    print(f"importing {len(new)} stories from {sorted({s['source'] for s in new})}")
+    save_stories(stories + new)
 
 
 def load_jsonl(path):
@@ -203,9 +229,15 @@ class TrainingData:
         return " " + " ".join(seq) + " " in self.joined
 
 
-def training_data_for(weights, cache={}):
-    ckpt = torch.load(WEIGHTS_DIR / weights, map_location="cpu", weights_only=True)
-    key = (ckpt["dataset"], ckpt.get("max_chars"))
+def data_key(story):
+    if "dataset" in story:
+        return story["dataset"], story["max_chars"]
+    # stories from before the dataset was stored with them: look it up in the weights
+    ckpt = torch.load(WEIGHTS_DIR / MODELS[story["source"]], map_location="cpu", weights_only=True)
+    return ckpt["dataset"], ckpt.get("max_chars") or DATASETS[ckpt["dataset"]]["max_chars"]
+
+
+def training_data_for(key, cache={}):
     if key not in cache:
         text = load_text(*key)
         cache[key] = TrainingData(text[:int(0.9 * len(text))])
@@ -244,10 +276,15 @@ def table(header, rows):
     return "\n".join(lines)
 
 
+def model_sources(stories):
+    # every model in the stories file, in the order it was added (includes imported ones)
+    return [s for s in dict.fromkeys(st["source"] for st in stories.values()) if s not in ("reference", "random")]
+
+
 def write_story_files(stories):
     # one readable file per model with the exact stories that were judged
     STORY_DIR.mkdir(parents=True, exist_ok=True)
-    for src in MODELS:
+    for src in model_sources(stories):
         lines = [f"{src}: {STORIES_PER_PROMPT} stories per prompt, max {MAX_NEW_CHARS} new characters, "
                  f"temperature {TEMPERATURE}", ""]
         for p, (group, prompt) in enumerate(all_prompts()):
@@ -263,11 +300,13 @@ def write_story_files(stories):
 def report():
     stories = {s["id"]: s for s in load_jsonl(STORIES_FILE)}
     write_story_files(stories)
-    sources = list(MODELS) + ["reference", "random"]
+    models = model_sources(stories)
+    sources = models + ["reference", "random"]
 
     # each model is checked against its own training data, the controls against the 5m data
-    train = {src: training_data_for(w) for src, w in MODELS.items()}
-    train["reference"] = train["random"] = training_data_for(MODELS[BASELINE_5M])
+    first = {s["source"]: s for s in reversed(list(stories.values()))}
+    train = {src: training_data_for(data_key(first[src])) for src in models}
+    train["reference"] = train["random"] = training_data_for(("tinystories", 5_000_000))
     metrics = {sid: auto_metrics(s, train[s["source"]]) for sid, s in stories.items()}
 
     sections = ["# Benchmark results",
@@ -276,7 +315,8 @@ def report():
                 "Model names are `<model>-<parameters>-c<context length>-d<training characters>`, e.g. "
                 "`gpt-10.8m-c256-d50m` is a 10.8M parameter GPT that sees 256 characters at a time, trained "
                 "on 50 million characters. d5m models used the TinyStories validation split, d50m models the "
-                "train split. All GPTs were trained for 5000 steps on the same number of characters per step.",
+                "train split. All GPTs were trained for 5000 steps with 16,384 characters per step (64 x 256 or "
+                "32 x 512), except names ending in `-b<N>`, which used batch N (e.g. -b64 at c512 = 32,768 per step).",
                 HOW_TO_READ.strip()]
 
     by_source = defaultdict(list)
@@ -292,9 +332,13 @@ def report():
     for path in judge_files:
         name = path.stem.removeprefix("judgments_")
         judgments = {j["id"]: j for j in load_jsonl(path) if j["id"] in stories}
-        if len(judgments) < len(stories):
-            sections.append(f"## Judge: {name}\n\nIncomplete ({len(judgments)}/{len(stories)} stories), left out.")
+        controls = [sid for sid, s in stories.items() if s["source"] in ("reference", "random")]
+        if any(sid not in judgments for sid in controls):
+            sections.append(f"## Judge: {name}\n\nThe reference and random stories aren't all judged yet, left out.")
             continue
+        unjudged = sorted({stories[sid]["source"] for sid in stories if sid not in judgments})
+        if unjudged:
+            print(f"{name}: not judged yet, left out of its tables: {unjudged}")
         all_judgments[name] = judgments
         for j in judgments.values():
             j["weighted"] = weighted_score(j)
@@ -316,7 +360,7 @@ def report():
             ["source", "n", *CRITERIA, "weighted", "normalised"], rows))
 
         rows = []
-        for src in MODELS:
+        for src in [m for m in models if groups[m]]:
             row = [src, str(round(normalised(groups[src])))]
             for g in PROMPTS:
                 js = [j for j in groups[src] if stories[j["id"]]["group"] == g]
@@ -349,14 +393,19 @@ def report():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("step", choices=["generate", "judge", "report"])
+    parser.add_argument("step", choices=["generate", "import", "judge", "report"])
+    parser.add_argument("file", nargs="?", help="for import: a stories file made with generate --weights")
+    parser.add_argument("--weights", help="generate: stories for just this weights file (e.g. on Kaggle)")
+    parser.add_argument("--out", help="generate --weights: where to save the stories")
     parser.add_argument("--judge-model", default="gemini-3.8-flash")
     parser.add_argument("--provider", default="gemini", choices=["gemini", "openrouter"])
     parser.add_argument("--rpm", type=float, default=10, help="max judge requests per minute")
     args = parser.parse_args()
 
     if args.step == "generate":
-        generate()
+        generate(args.weights, args.out)
+    elif args.step == "import":
+        import_stories(args.file)
     elif args.step == "judge":
         judge(args.judge_model, args.provider, args.rpm)
     else:

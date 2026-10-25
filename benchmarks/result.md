@@ -2,7 +2,7 @@
 
 4 stories per prompt, 6 prompts, max 600 new characters, temperature 0.8.
 
-Model names are `<model>-<parameters>-c<context length>-d<training characters>`, e.g. `gpt-10.8m-c256-d50m` is a 10.8M parameter GPT that sees 256 characters at a time, trained on 50 million characters. d5m models used the TinyStories validation split, d50m models the train split. All GPTs were trained for 5000 steps on the same number of characters per step.
+Model names are `<model>-<parameters>-c<context length>-d<training characters>`, e.g. `gpt-10.8m-c256-d50m` is a 10.8M parameter GPT that sees 256 characters at a time, trained on 50 million characters. d5m models used the TinyStories validation split, d50m models the train split. All GPTs were trained for 5000 steps with 16,384 characters per step (64 x 256 or 32 x 512), except names ending in `-b<N>`, which used batch N (e.g. -b64 at c512 = 32,768 per step).
 
 ## How to read this
 
@@ -39,6 +39,7 @@ Model names are `<model>-<parameters>-c<context length>-d<training characters>`,
 | gpt-10.8m-c256-d50m | 0.99 ± 0.01 | 0.91 ± 0.06 | 0.71 ± 0.46 | 7.79 ± 4.64 |
 | gpt-10.9m-c512-d50m | 0.98 ± 0.03 | 0.83 ± 0.10 | 0.58 ± 0.50 | 7.29 ± 4.56 |
 | gpt-19.3m-c512-d50m | 0.99 ± 0.02 | 0.86 ± 0.07 | 0.54 ± 0.51 | 9.79 ± 3.61 |
+| gpt-10.9m-c512-d50m-b64 | 0.98 ± 0.04 | 0.87 ± 0.06 | 0.75 ± 0.44 | 7.92 ± 5.85 |
 | reference | 1.00 ± 0.01 | 0.91 ± 0.05 | 0.33 ± 0.49 | 8.75 ± 4.92 |
 | random | 0.08 ± 0.02 | 1.00 ± 0.00 | 0.00 ± 0.00 | 0.00 ± 0.00 |
 
@@ -54,6 +55,7 @@ Claude Haiku 5.5, run as Claude Code subagents: one fresh agent per story, same 
 | gpt-10.8m-c256-d50m | 24 | 4.04 ± 1.00 | 2.67 ± 0.56 | 1.96 ± 0.62 | 2.75 ± 0.85 | 2.12 ± 0.45 | 1.88 ± 0.34 | 3.29 ± 0.55 | 2.55 ± 0.36 | 46 |
 | gpt-10.9m-c512-d50m | 24 | 3.50 ± 1.22 | 2.42 ± 0.72 | 1.71 ± 0.46 | 3.00 ± 0.78 | 1.96 ± 0.36 | 1.79 ± 0.51 | 2.96 ± 0.46 | 2.36 ± 0.41 | 40 |
 | gpt-19.3m-c512-d50m | 24 | 3.79 ± 0.93 | 2.50 ± 0.51 | 1.92 ± 0.41 | 3.04 ± 0.75 | 2.12 ± 0.34 | 1.92 ± 0.28 | 3.04 ± 0.46 | 2.51 ± 0.26 | 44 |
+| gpt-10.9m-c512-d50m-b64 | 24 | 4.04 ± 1.00 | 2.88 ± 0.61 | 2.17 ± 0.56 | 3.12 ± 0.74 | 2.17 ± 0.38 | 2.00 ± 0.00 | 3.50 ± 0.51 | 2.71 ± 0.34 | 51 |
 | reference | 12 | 5.00 ± 0.00 | 4.42 ± 0.51 | 4.58 ± 0.51 | 4.75 ± 0.45 | 3.50 ± 0.52 | 3.75 ± 0.45 | 4.25 ± 0.45 | 4.25 ± 0.29 | 100 |
 | random | 6 | 1.00 ± 0.00 | 1.00 ± 0.00 | 1.00 ± 0.00 | 2.00 ± 0.00 | 1.00 ± 0.00 | 1.00 ± 0.00 | 1.00 ± 0.00 | 1.12 ± 0.00 | 0 |
 
@@ -73,3 +75,4 @@ How well each model holds up as the opening text gets less like the training dat
 | gpt-10.8m-c256-d50m | 46 | 49 | 39 | 49 |
 | gpt-10.9m-c512-d50m | 40 | 49 | 33 | 37 |
 | gpt-19.3m-c512-d50m | 44 | 48 | 43 | 42 |
+| gpt-10.9m-c512-d50m-b64 | 51 | 56 | 45 | 51 |
