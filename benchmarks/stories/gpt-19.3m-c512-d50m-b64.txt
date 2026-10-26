@@ -1,0 +1,151 @@
+gpt-19.3m-c512-d50m-b64: 4 stories per prompt, max 600 new characters, temperature 0.8
+
+================================================================================
+familiar (in-distribution)
+prompt: 'Once upon a time'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+Once upon a time, there was a poor little girl named Lucy. She liked to go on a farm with her mom and dad, and they were going to a farm. Lucy had a place to get some of the steam and pretty juice. She would swim and play with her friends.
+One day, Lucy saw a big fruit in the woods. She thought it was very yummy. She wanted to eat it. She said, "Mom, look at this fruit! I have a big box!" Her mom said, "They are very cute and spicy. Can we keep it?"
+Lucy was scared that the fruit was not a fruit at all. She said, "Okay, dad. A big truck is taken and it is time to go home. You can play games and catch on the f
+
+--- story 2 (stopped at 600 characters) ---
+Once upon a time, in a small town, there was a little girl named Lily. She had a big garden with many plants. Lily loved her garden very much. She planted to win the plants and touch them.
+One day, Lily saw a big man coming over to her house. He was very curious and wanted to see what was inside. Lily ran to her mom and asked, "Mom, can I help the man?" Her mom shook her head. Lily didn't want to see the man.
+Lily kept trying and asked, "Why is the man coming?" Her mom smiled and said, "The man is very creative, but I like it. It has a soft shape for you."
+Lily shook her head and said, "Thank you, mom. You ar
+
+--- story 3 (stopped at 600 characters) ---
+Once upon a time, there was a little player named Tiny. Tiny liked to run and play in the sun. One day, he saw a big stone on the ground. He wondered who thought it would be fun to climb it.
+Tiny climbed up the stone to the stone and shouted "Go away!" Tiny laughed and did not stop. He climbed on the stone and walked away. The stone closed the stone. The stone broke into pieces. Tiny was sad because he could not escape.
+Tiny went home and told his mom about the stone he could help. His mom said, "It's okay to climb the stone without stones. We can still stay by who they are having fun." Tiny and his mom thoug
+
+--- story 4 (ended on its own) ---
+Once upon a time, there was a little fish named Fin. Fin lived in a big green ice day with his friends. They all liked to play together.
+One day, while Fin was playing, he met a small boy named Tim. Tim wanted to play outside when he saw his friend, Sue. Sue was sad because she wanted to play with Fin. She said, "Fin, you two friends! But I like your ice day."
+Fin tried to help, but he was still careless. He played outside with Fin's ice day. Fin was very happy to see Sue and his day play. They laughed and had fun. Fin's ice day was better than a good ice day.
+
+================================================================================
+familiar (in-distribution)
+prompt: 'One day, a little girl named Lily'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+One day, a little girl named Lily found a shiny copper. She thought it would be a good place to sit on it.
+Lily showed the copper copper copper copper copper copper copper co pretty. She asked her mom if she could lift it. Her mom said yes, but Lily was very brave.
+Lily showed the copper copper copper copper coin. He kissed it and said, "Look, Mom! I found a copper!" Her mom looked at the copper copper copper coin and smiled. "Wow, Lily! That's a magic copper copper!" she said. Lily was happy to see her friend.
+They played with the magic copper copper copper coin all day. One day, Lily and her friends were playing with paper
+
+--- story 2 (stopped at 600 characters) ---
+One day, a little girl named Lily found a big box. The box was a big box with a note. Lily did not know what was inside the box. She opened the box and found a story inside. The story was broken and shiny. Lily was very sad.
+Lily's mom showed her the toy and said, "Don't worry, Lily. It's important. We can fix it." Lily agreed. They walked away to the park and found a big stick. It was red and looked like a big box. Lily and her mom were very happy. They took the stick and started to fix it.
+They put the stick in the box and started to dance and dance. The stick was fun and warm. Lily felt good because she didn't know how to
+
+--- story 3 (stopped at 600 characters) ---
+One day, a little girl named Lily went to the store with her mom. They were going to the store with their mom. The store had a picture of a big tree on a big tree. Lily liked the picture, but sometimes she found a toy box in her mom's room.
+Lily opened the box and saw a little boy named Tim. Tim had a toy car. He was sad because he could not play with it. Lily said, "Why are you sad outside, Tim?" Tim said, "I lost my toy car. Can you help me find it?"
+Lily looked at Tim and felt bad for him. She said, "I'm sorry, mom. I didn't mean to hurt you." Tim and Lily learned to help the boy. They found the toy car and used it to get
+
+--- story 4 (stopped at 600 characters) ---
+One day, a little girl named Lily went to the park with her mom. They saw a big tree with flowers and trees. Lily wanted to jump in the flowers and play with them.
+At the park, Lily saw a little girl named Lily. She had a big toy box with a big box. Lily wanted to play with the box, but her mom said, "No, it's too high for you. We can do it again."
+Lily was sad and cried. She did not give up. Mom heard Lily and came to help. She saw the box and said, "Don't worry, Lily. We can play with it together." Lily put the box down and her mom opened the door. They played with the box inside. They had a lot of fun.
+From that day on, Li
+
+================================================================================
+altered (near)
+prompt: 'Once upon a time, a robot named Zed'
+================================================================================
+
+--- story 1 (stopped at 600 characters) ---
+Once upon a time, a robot named Zed wanted to ride his yellow brain. He took all his brain and found a big stick in a box. He did not know what was inside. Zee was very happy and excited to start to ride.
+When he got to the box, he found a toy near the door. Zee was scared and did not know what was inside. He wanted to open it. But, he knew it was the best day ever. He tried to open it, but it was too high for Zee's brain.
+So, Zee had to rescue him. He said, "Don't worry, I will help you ride your yellow brain. I can help you ride the box faster." Zee was happy to see Zee's brain on his brain. He played with his ride all day lo
+
+--- story 2 (stopped at 600 characters) ---
+Once upon a time, a robot named Zed. Zee loved to count on his big shoes. He would choose his shoes and start his very much. One day, Zee was very excited to count on his favorite shoes. He walked and walked until he saw a big, yummy ice cream in the garage.
+Zee's mom said, "Hi, Zee! Can I have the ice cream?" Zee was very happy and said, "Yes, I can have the ice cream on you!" So, Zee counted one ice cream and started down the shoes.
+As Zee chose the robot, he met a little bird. The bird said, "Hi, Zee! Do you want to play with me?" Zee looked at his yummy ice cream and said, "Yes, I would love the ice. But I can't fly high in
+
+--- story 3 (stopped at 600 characters) ---
+Once upon a time, a robot named Zedy was in the park. Zee was very excited to sleep. He took a break and sat on it.
+While Zee was sleeping, a little boy named Tim came to the park. He saw Zee and said, "Zee! Can you help me?" Zee thought for a moment and said, "Yes, I can help you. You can help me."
+Tim and Zee went to the park. They sat on a bench and talked about the big bird. They were happy to see the bird. But then, something unexpected happened. The bird took Zee away and Zee was sad. Zee and Tim were sad because they could not find the bird's home.
+Zee saw the bird and asked, "Why are you sad?" Zee and Tim said, "I want
+
+--- story 4 (ended on its own) ---
+Once upon a time, a robot named Zedy wanted to store his favorite salad. He had a big heart and liked to play with his friends. One day, Zedy went for a walk in the park.
+While he was walking, he saw a small bug. The bug was sad because it could not fly. Zedy wanted to help the bug. So, he started to fix the bug. He was so happy!
+As Zedy fixed the bug, it started to rain. The bug was sad and could not play with it as fast. Zedy wanted to help the bug. So, he went home with his heart and played with the rain. The rain was fun and became best friends.
+
+================================================================================
+altered (near)
+prompt: 'One day, a grumpy dragon wanted to'
+================================================================================
+
+--- story 1 (ended on its own) ---
+One day, a grumpy dragon wanted to prevent a building the cap from the cap. He took the cap home and said, "Give me that cap!"
+The grumpy dragon and the building dragon became good friends. They all played together every day. The building was a happy place to play.
+
+--- story 2 (stopped at 600 characters) ---
+One day, a grumpy dragon wanted to have a party. He asked the dragon, "What are you there?" The dragon said, "I am here to celebrate. I have a buckle in this middle."
+The dragon thought for a moment and said, "Let's go to the middle of the middle of the middle of the middle of the middle of the middle of the middle." The dragon and the dragon thought and thought. They were both scared of the middle of the middle of the middle of the middle of the middle of the middle of the middle.
+The next day, the dragon and the dragon went to the middle of the middle of the middle of the middle of the middle of the middle of the the middle
+
+--- story 3 (stopped at 600 characters) ---
+One day, a grumpy dragon wanted to go to the park. He thought and thought. He wanted to see what was inside.
+So, the dragon went to the park. He was very excited. He wanted to save the fart. He walked up to his mom and said, "Mom, look! I found a farthest!" His mom smiled and said, "That's grumpy! It was so pretty!"
+At the park, he saw a boy with a big box of soft fur. He was very curious about the soft furthes. He wanted to know what was inside the box. He opened the box and pressed a big box for the farthest. The farthest house were soft and colorful.
+The dragon looked at his mom and said, "Hi, I'm Mr. Furthest house. I was
+
+--- story 4 (ended on its own) ---
+One day, a grumpy dragon wanted to design the opera. He tried and tried, but he was too scared to cry.
+The dragon tried to catch the opera, but he was too strong. He had to do something special to him. He called out to his friends, but he was strong.
+The dragon said, "Hello, I am Tom. Do you want to play with me?" Tom smiled and said, "Yes, please!" They played together all day. The opera was their favorite day.
+
+================================================================================
+unfamiliar (out-of-distribution)
+prompt: 'The scientist looked at the data and'
+================================================================================
+
+--- story 1 (ended on its own) ---
+The scientist looked at the data and the words said, "Your dad can bring it back." The girl was so happy to be home and they all worked together to rest.
+After they finished the restaurant, the girl and her mom learned that they should listen to the datache of the words. The end.
+
+--- story 2 (ended on its own) ---
+The scientist looked at the data and said, "Thank you, Timmy. You are a good friend."
+In the end, Timmy and Spot were both happy that they did not know that the best way to play together. They all became good friends and played together every day.
+
+--- story 3 (ended on its own) ---
+The scientist looked at the data and said, "Hi, I am Dark. I have a friend to help. I wish I had never seen a big dog again."
+The datache was scared but did not listen to Dark. He took the noise and found a big box. Dark was eating the peanut and a big scissors. Dark was scared and cried to help his friend. From that day on, Dark knew that sometimes, when you share, you can still be friends.
+
+--- story 4 (ended on its own) ---
+The scientist looked at the data and smiled. They were so happy.
+The cool little boy wanted to go on an adventure. He was very patient and waited for the cool lion to finish the right way. The scientist looked around and saw a big, happy dog. The dog was sad and cried. The cool lion wanted to help the cool dog. They talked and laughed.
+The cool lion thought, "I will go on an adventure to finish the right way." But the cool lion did not listen. He kept talking and laughing and playing and playing with the dog. One day, the cool lion was feeling very thankful for the dog. He ran away with the dog, feeling very happy.
+
+================================================================================
+unfamiliar (out-of-distribution)
+prompt: 'In the year 3000, the city'
+================================================================================
+
+--- story 1 (ended on its own) ---
+In the year 3000, the city means lived on a side in the sea. The friends liked to swim in the water and play in the water. The city was very compassionate and happy.
+One day, the city saw a big rope. The city was scared and ran to the rope. The city said, "Hi, city. I like your rope." The friends looked at the rope and said, "Thank you, city!" They played with the other city and had fun. The city was happy too. They all played in the water and had a great day.
+
+--- story 2 (ended on its own) ---
+In the year 3000, the city and the little girl were surprised. They knew the cat was scared and didn't know what to do. They hugged each other and said, "You have a good idea to welcome me." The little girl and the city hugged each other and kept playing with the cat and the little girl. And they all lived happily ever after.
+
+--- story 3 (ended on its own) ---
+In the year 3000, the city flew out of the corner, there were many kids playing.
+The birds ate all the kids and said, "You did not want to play with a toy car!"
+The daughter said, "No, I want to play with the kids!"
+The birds were sad. They did not know what to do. They wanted to play with the kids too.
+Then, the big city looked for a place to rest. The kids pretended to be friends. They chased the kids, but they did not want to share. The big city was very sad.
+
+--- story 4 (stopped at 600 characters) ---
+In the year 3000, the city moved. It was so big that it was starting to park. It could not reach its wall anymore. Mum saw the city and said, "Let's go find the extra home and find it!" She looked around and saw a big box of paper on the table.
+Mum said, "Okay, you can park the mess to make the city bigger. But first, let's keep things different." Lucy and the city hopped and looked growling. They saw the same animals supplying the city. They saw a big paper button on the table. It was light on the table. Lucy and the city were very happy. They thanked Mum and the city.
+Mum asked, "What's this?" Lucy and the city agree
