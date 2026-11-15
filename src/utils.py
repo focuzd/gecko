@@ -3,6 +3,7 @@ from pathlib import Path
 import torch
 
 from bigram import BigramLanguageModel
+from encdec import EncoderDecoderLanguageModel
 from gpt import GPTLanguageModel
 from mlp import MLPLanguageModel
 
@@ -16,6 +17,7 @@ MODELS = {
     "bigram": BigramLanguageModel,
     "mlp": MLPLanguageModel,
     "gpt": GPTLanguageModel,
+    "encdec": EncoderDecoderLanguageModel,
 }
 
 

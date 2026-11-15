@@ -19,6 +19,29 @@ CONFIGS = {
     "gpt-20m": dict(model="gpt", model_args=dict(n_embd=512, n_head=8, n_layer=6, dropout=0.2),
                     batch_size=64, block_size=256, max_iters=5000, eval_interval=500,
                     learning_rate=3e-4, eval_iters=200),
+    # encoder-decoder matched to gpt-10.9m-c512-d50m-b64: 512 characters of context (256 encoder + 256 decoder),
+    # batch 64, 5000 steps, 3 + 3 layers instead of 6, slightly narrower (360) to keep ~11M parameters,
+    # since each decoder layer also has a cross-attention
+    "encdec": dict(model="encdec", model_args=dict(n_embd=360, n_head=6, n_enc_layer=3, n_dec_layer=3,
+                                                   dropout=0.2),
+                   batch_size=64, block_size=512, max_iters=5000, eval_interval=500,
+                   learning_rate=3e-4, eval_iters=200),
+    # layer-split ablation: identical to encdec except the encoder/decoder layer counts, with the width picked
+    # to stay near the GPT baseline's 10.91M parameters (6 heads, width divisible by 6). run_label puts the
+    # split in the run name, e.g. encdec-2e4d-10.9m-c512-d50m-b64; plain encdec runs are the 3e3d split
+    "encdec-2e4d": dict(model="encdec", run_label="encdec-2e4d",
+                        model_args=dict(n_embd=348, n_head=6, n_enc_layer=2, n_dec_layer=4, dropout=0.2),
+                        batch_size=64, block_size=512, max_iters=5000, eval_interval=500,
+                        learning_rate=3e-4, eval_iters=200),
+    "encdec-4e2d": dict(model="encdec", run_label="encdec-4e2d",
+                        model_args=dict(n_embd=366, n_head=6, n_enc_layer=4, n_dec_layer=2, dropout=0.2),
+                        batch_size=64, block_size=512, max_iters=5000, eval_interval=500,
+                        learning_rate=3e-4, eval_iters=200),
+    # ~1M parameter version that trains on a CPU in minutes, for checking it learns at all
+    "encdec-tiny": dict(model="encdec", model_args=dict(n_embd=128, n_head=4, n_enc_layer=2, n_dec_layer=2,
+                                                        dropout=0.1),
+                        batch_size=32, block_size=128, max_iters=2000, eval_interval=250,
+                        learning_rate=1e-3, eval_iters=50),
 }
 
 SEED = 1337
@@ -73,7 +96,7 @@ def train(dataset, config_name, max_chars=None, block_size=None, batch_size=None
         model_args["block_size"] = block_size
     model = MODELS[cfg["model"]](**model_args).to(device)
     n_params = sum(p.numel() for p in model.parameters())
-    name = run_name(cfg["model"], n_params, block_size, max_chars, batch_size)
+    name = run_name(cfg.get("run_label", cfg["model"]), n_params, block_size, max_chars, batch_size)
     if use_amp:
         name += "-fp16"
     print(f"{name}: {n_params / 1e6:.2f}M parameters, batch {batch_size} x {block_size}, "
