@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gecko Project Milestones</title>
+<meta name="description" content="Milestones and results of Gecko, a character-level story-writing language model built from scratch on TinyStories.">
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7;
+    --surface: #fcfcfb;
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --axis: #c3c2b7;
+    --ring: rgba(11,11,11,0.10);
+    --series: #2a78d6;
+    --series-soft: rgba(42,120,214,0.10);
+    --good: #0ca30c; --good-ink: #006300;
+    --warn: #fab219;
+    --none: #898781;
+    --seq-0: #cde2fb; --seq-1: #9ec5f4; --seq-2: #6da7ec; --seq-3: #3987e5;
+    --seq-4: #256abf; --seq-5: #184f95; --seq-6: #0d366b;
+    --seq-ink-0: #0b0b0b; --seq-ink-1: #0b0b0b; --seq-ink-2: #0b0b0b; --seq-ink-3: #ffffff;
+    --seq-ink-4: #ffffff; --seq-ink-5: #ffffff; --seq-ink-6: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #898781;
+      --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10);
+      --series: #3987e5; --series-soft: rgba(57,135,229,0.12);
+      --good: #0ca30c; --good-ink: #0ca30c;
+      --seq-0: #0d366b; --seq-1: #184f95; --seq-2: #1c5cab; --seq-3: #256abf;
+      --seq-4: #3987e5; --seq-5: #6da7ec; --seq-6: #9ec5f4;
+      --seq-ink-0: #ffffff; --seq-ink-1: #ffffff; --seq-ink-2: #ffffff; --seq-ink-3: #ffffff;
+      --seq-ink-4: #0b0b0b; --seq-ink-5: #0b0b0b; --seq-ink-6: #0b0b0b;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10);
+    --series: #3987e5; --series-soft: rgba(57,135,229,0.12);
+    --good: #0ca30c; --good-ink: #0ca30c;
+    --seq-0: #0d366b; --seq-1: #184f95; --seq-2: #1c5cab; --seq-3: #256abf;
+    --seq-4: #3987e5; --seq-5: #6da7ec; --seq-6: #9ec5f4;
+    --seq-ink-0: #ffffff; --seq-ink-1: #ffffff; --seq-ink-2: #ffffff; --seq-ink-3: #ffffff;
+    --seq-ink-4: #0b0b0b; --seq-ink-5: #0b0b0b; --seq-ink-6: #0b0b0b;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--page); color: var(--ink);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  a { color: var(--series); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+
+  header { padding: 48px 0 24px; }
+  .eyebrow { color: var(--ink-2); font-size: 14px; letter-spacing: .02em; margin: 0 0 8px; }
+  h1 { font-size: clamp(32px, 6vw, 48px); line-height: 1.1; margin: 0 0 12px; font-weight: 700; }
+  .lede { font-size: 18px; color: var(--ink-2); max-width: 720px; margin: 0 0 20px; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .links a {
+    text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--ring);
+    padding: 6px 12px; border-radius: 999px; font-size: 14px;
+  }
+  .links a:hover { border-color: var(--series); }
+
+  nav.toc { position: sticky; top: 0; z-index: 5; background: var(--page); border-bottom: 1px solid var(--grid); }
+  nav.toc .wrap { display: flex; gap: 16px; overflow-x: auto; padding-top: 10px; padding-bottom: 10px; scrollbar-width: none; }
+  nav.toc a { color: var(--ink-2); text-decoration: none; font-size: 14px; white-space: nowrap; }
+  nav.toc a:hover { color: var(--ink); }
+
+  section { padding: 40px 0 8px; }
+  h2 { font-size: 26px; margin: 0 0 6px; }
+  .sub { color: var(--ink-2); margin: 0 0 20px; max-width: 760px; }
+  .card { background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; padding: 20px; }
+  .card h3 { margin: 0 0 4px; font-size: 18px; }
+
+  .stats { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+  .stat .label { color: var(--ink-2); font-size: 14px; }
+  .stat .value { font-size: 32px; font-weight: 600; line-height: 1.2; }
+  .stat .note { color: var(--muted); font-size: 13px; }
+  .stat.hero .value { font-size: 56px; }
+  @media (max-width: 760px) { .stats { grid-template-columns: repeat(3, 1fr); } .stat.hero { grid-column: 1 / -1; } }
+  @media (max-width: 520px) { .stats { grid-template-columns: 1fr; } .stat .value { font-size: 28px; } }
+  section { scroll-margin-top: 48px; }
+
+  /* timeline */
+  .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+  .timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--grid); }
+  .timeline li { position: relative; padding: 0 0 22px 32px; }
+  .timeline li::before {
+    content: ""; position: absolute; left: 2px; top: 6px; width: 12px; height: 12px; border-radius: 50%;
+    background: var(--series); box-shadow: 0 0 0 2px var(--page);
+  }
+  .timeline li.future::before { background: var(--page); border: 2px solid var(--muted); width: 12px; height: 12px; }
+  .tl-date { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .tl-title { font-weight: 600; }
+  .tl-body { color: var(--ink-2); font-size: 15px; }
+  .tl-body .score { color: var(--ink); font-weight: 600; }
+  .commit { font: 12px ui-monospace, SFMono-Regular, Consolas, monospace; color: var(--muted); text-decoration: none; margin-left: 6px; }
+  .commit:hover { color: var(--series); }
+
+  /* bar charts (HTML) */
+  .chart-title { font-weight: 600; margin: 0 0 2px; }
+  .chart-sub { color: var(--ink-2); font-size: 14px; margin: 0 0 16px; }
+  .bars { display: grid; grid-template-columns: minmax(120px, 230px) 1fr; row-gap: 10px; column-gap: 12px; align-items: center; }
+  .bar-label { font-size: 14px; line-height: 1.25; }
+  .bar-label small { display: block; color: var(--muted); font-size: 12px; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; word-break: break-all; }
+  .bar-track { position: relative; height: 24px; }
+  .bar-track .gridl { position: absolute; top: -5px; bottom: -5px; width: 1px; background: var(--grid); }
+  .bar-track .base { position: absolute; left: 0; top: -5px; bottom: -5px; width: 1px; background: var(--axis); }
+  .bar {
+    position: absolute; left: 0; top: 3px; height: 18px; background: var(--series);
+    border-radius: 0 4px 4px 0; outline: none; cursor: default;
+  }
+  .bar:hover, .bar:focus-visible { filter: brightness(1.12); }
+  .bar-val { position: absolute; top: 1px; z-index: 2; padding: 0 4px; border-radius: 4px; background: var(--surface); font-size: 13px; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .refline { position: absolute; z-index: 1; top: -8px; bottom: -8px; width: 0; border-left: 2px solid var(--ink-2); }
+  .axis-row { display: grid; grid-template-columns: minmax(120px, 230px) 1fr; column-gap: 12px; margin-top: 6px; }
+  .axis { position: relative; height: 18px; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .axis span { position: absolute; transform: translateX(-50%); }
+  @media (max-width: 560px) {
+    .bars, .axis-row { grid-template-columns: 1fr; row-gap: 4px; }
+    .bar-label { margin-top: 8px; }
+    .axis-row > :first-child { display: none; }
+  }
+
+  details.table-view { margin-top: 16px; }
+  details.table-view summary { cursor: pointer; color: var(--ink-2); font-size: 14px; }
+  .tbl { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 10px; }
+  .tbl th, .tbl td { padding: 6px 8px; border-bottom: 1px solid var(--grid); text-align: left; }
+  .tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .scroll { overflow-x: auto; }
+
+  /* experiments */
+  .exps { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 12px; }
+  .exp .q { color: var(--ink-2); font-size: 14px; margin: 0 0 12px; }
+  .exp .delta { display: flex; align-items: baseline; gap: 10px; margin: 4px 0 8px; font-variant-numeric: tabular-nums; }
+  .exp .delta .from { font-size: 24px; color: var(--ink-2); }
+  .exp .delta .arrow { color: var(--muted); }
+  .exp .delta .to { font-size: 32px; font-weight: 600; }
+  .exp .delta .unit { color: var(--muted); font-size: 13px; }
+  .exp p { margin: 0 0 8px; font-size: 15px; }
+  .exp .held { color: var(--muted); font-size: 13px; margin: 0; }
+  .verdict { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; padding: 2px 10px 2px 8px; border-radius: 999px; border: 1px solid var(--ring); }
+  .verdict svg { width: 14px; height: 14px; flex: none; }
+
+  /* scatter */
+  #scatter { width: 100%; }
+  #scatter svg { display: block; width: 100%; overflow: visible; }
+  #scatter text { fill: var(--ink-2); font-size: 12px; font-family: inherit; }
+  #scatter .pt-label { fill: var(--ink); font-size: 13px; font-weight: 600; }
+  #scatter .tick { fill: var(--muted); font-variant-numeric: tabular-nums; }
+
+  /* heatmap */
+  .heat { border-collapse: separate; border-spacing: 2px; width: 100%; font-size: 14px; }
+  .heat th { font-weight: 500; color: var(--ink-2); padding: 6px 8px; text-align: center; font-size: 13px; }
+  .heat th.row { text-align: left; color: var(--ink); white-space: nowrap; }
+  .heat td { text-align: center; padding: 9px 4px; border-radius: 4px; font-variant-numeric: tabular-nums; font-weight: 600; min-width: 44px; }
+  .key { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); margin-top: 12px; flex-wrap: wrap; }
+  .key .ramp { display: flex; gap: 2px; }
+  .key .ramp span { width: 22px; height: 12px; border-radius: 2px; }
+
+  /* stories */
+  .stories { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .story .who { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .story .who strong { font-size: 16px; }
+  .story .who span { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .story blockquote { margin: 0; color: var(--ink-2); font-size: 15px; font-family: Georgia, "Times New Roman", serif; font-style: italic; line-height: 1.5; }
+  .story .meta { margin-top: 10px; font-size: 13px; color: var(--muted); }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+  ul.plain { margin: 0; padding-left: 20px; }
+  ul.plain li { margin-bottom: 6px; }
+
+  footer { color: var(--muted); font-size: 14px; padding: 40px 0 48px; border-top: 1px solid var(--grid); margin-top: 48px; }
+
+  #tip {
+    position: fixed; z-index: 20; pointer-events: none; opacity: 0; transition: opacity .1s;
+    background: var(--surface); color: var(--ink); border: 1px solid var(--ring); border-radius: 8px;
+    padding: 8px 10px; font-size: 13px; line-height: 1.4; max-width: 260px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.12);
+  }
+  #tip b { display: block; margin-bottom: 2px; }
+  #tip .row { display: flex; justify-content: space-between; gap: 16px; font-variant-numeric: tabular-nums; }
+  #tip .row span:first-child { color: var(--ink-2); }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <p class="eyebrow">Trustworthy AI course project · October to November 2026</p>
+  <h1>Gecko</h1>
+  <p class="lede">A family of small story-writing language models built from scratch, one character at a time, plus a blind benchmark to measure honestly whether each change made the stories better.</p>
+  <div class="links">
+    <a href="https://github.com/focuzd/gecko">Code on GitHub</a>
+    <a href="https://github.com/focuzd/gecko/blob/main/report.md">Report</a>
+    <a href="https://github.com/focuzd/gecko/blob/main/explanation.md">Full explanation</a>
+    <a href="https://github.com/focuzd/gecko/blob/main/glossary.md">Glossary</a>
+    <a href="https://github.com/focuzd/gecko/blob/main/pitch.md">Pitch</a>
+  </div>
+
+  <div class="stats">
+    <div class="card stat hero">
+      <div class="label">Best story score</div>
+      <div class="value">53 <span style="font-size:20px;color:var(--muted);font-weight:500">/ 100</span></div>
+      <div class="note">0 = random letters, 100 = real TinyStories</div>
+    </div>
+    <div class="card stat">
+      <div class="label">Model types built</div>
+      <div class="value">4</div>
+      <div class="note">bigram, MLP, GPT, encoder-decoder</div>
+    </div>
+    <div class="card stat">
+      <div class="label">Models benchmarked</div>
+      <div class="value">8</div>
+      <div class="note">24 stories each</div>
+    </div>
+    <div class="card stat">
+      <div class="label">Stories judged</div>
+      <div class="value">210</div>
+      <div class="note">incl. 12 real and 6 random controls</div>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="wrap">
+    <a href="#milestones">Milestones</a>
+    <a href="#journey">Score journey</a>
+    <a href="#experiments">Experiments</a>
+    <a href="#loss">Loss vs quality</a>
+    <a href="#criteria">Criteria</a>
+    <a href="#copying">Copying</a>
+    <a href="#stories">Sample stories</a>
+    <a href="#method">Method</a>
+    <a href="#next">What's next</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section id="milestones">
+  <h2>Milestones</h2>
+  <p class="sub">Every step of the project, in order. Commit links open the change on GitHub.</p>
+  <div class="card">
+    <ol class="timeline" id="timeline"></ol>
+  </div>
+</section>
+
+<section id="journey">
+  <h2>The score journey</h2>
+  <p class="sub">Each model's overall story score, in the order we built them. Hover a bar for its loss and training setup.</p>
+  <div class="card">
+    <p class="chart-title">Normalised story score (0 to 100)</p>
+    <p class="chart-sub">Judged by Claude Haiku 5.5 on 24 stories per model. Real TinyStories stories define 100.</p>
+    <div class="bars" id="scoreBars"></div>
+    <div class="axis-row"><div></div><div class="axis" id="scoreAxis"></div></div>
+    <details class="table-view"><summary>Show as a table</summary><div class="scroll" id="scoreTable"></div></details>
+  </div>
+</section>
+
+<section id="experiments">
+  <h2>Changing one thing at a time</h2>
+  <p class="sub">Each card compares two models that differ in the factor named. A difference counts as real only if the paired test says so; with 24 stories, gaps of about 5 points can be chance.</p>
+  <div class="exps" id="exps"></div>
+</section>
+
+<section id="loss">
+  <h2>Lower loss did not always mean better stories</h2>
+  <p class="sub">The five GPTs trained on the same 50M characters. If validation loss told the whole story, the points would rise steadily from right to left. Models B and C have lower loss than A but write worse stories.</p>
+  <div class="card">
+    <p class="chart-title">Validation loss vs story score</p>
+    <p class="chart-sub">Lower loss is to the left. Higher score is up.</p>
+    <div id="scatter" role="img" aria-label="Scatter plot of validation loss against story score for five GPT models"></div>
+    <details class="table-view"><summary>Show as a table</summary><div class="scroll" id="lossTable"></div></details>
+  </div>
+</section>
+
+<section id="criteria">
+  <h2>What the judge saw</h2>
+  <p class="sub">Average score from 1 to 5 on each criterion. Spelling is nearly solved; consistency and meaning have stayed near 2 for every GPT.</p>
+  <div class="card">
+    <div class="scroll"><table class="heat" id="heat"></table></div>
+    <div class="key"><span>1</span><span class="ramp" id="rampKey"></span><span>5 out of 5</span><span>· hover a cell for details</span></div>
+  </div>
+</section>
+
+<section id="copying">
+  <h2>Does it copy its training data?</h2>
+  <p class="sub">Longest run of words copied exactly from the model's own training text, averaged over 24 stories. Real stories share stock phrases, so some copying is normal. Our longest-trained model goes past that line.</p>
+  <div class="card">
+    <p class="chart-title">Longest copied span (words)</p>
+    <p class="chart-sub">The vertical line marks real TinyStories stories (8.75 words).</p>
+    <div class="bars" id="copyBars"></div>
+    <div class="axis-row"><div></div><div class="axis" id="copyAxis"></div></div>
+    <details class="table-view"><summary>Show as a table</summary><div class="scroll" id="copyTable"></div></details>
+  </div>
+</section>
+
+<section id="stories">
+  <h2>What the stories look like</h2>
+  <p class="sub">Excerpts from the benchmark, all continuing "Once upon a time" with the same settings.</p>
+  <div class="stories" id="storyCards"></div>
+</section>
+
+<section id="method">
+  <h2>How we measured</h2>
+  <div class="two">
+    <div class="card">
+      <h3>The benchmark</h3>
+      <ul class="plain">
+        <li><b>6 openings in 3 groups:</b> familiar ("Once upon a time"), altered ("Once upon a time, a robot named Zed"), and unfamiliar ("The scientist looked at the data and").</li>
+        <li><b>4 stories per opening</b> with the same seeds for every model, temperature 0.8, up to 600 new characters.</li>
+        <li><b>Controls:</b> 12 real stories set 100 and 6 random-character strings set 0.</li>
+        <li><b>Automatic checks:</b> real-word rate, repetition (distinct-2), ending on its own, longest copied span.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The judge</h3>
+      <ul class="plain">
+        <li><b>One fresh judge per story</b> (Claude Haiku 5.5), so it can't compare stories or drift.</li>
+        <li><b>Blind:</b> the judge never knows which model wrote the story.</li>
+        <li><b>7 criteria, scored 1 to 5</b> against a written rubric, with a justification first. Consistency, structure and meaning count 1.5×.</li>
+        <li><b>Paired tests:</b> stories with the same opening and seed are compared head to head.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="next">
+  <h2>Where things stand</h2>
+  <div class="two">
+    <div class="card">
+      <h3>The encoder-decoder</h3>
+      <p style="margin:0 0 8px">Built and tested at small scale. The encoder reads the older 256 characters and the decoder writes the newest 256. Three 11M-parameter versions (3+3, 2+4 and 4+2 layers) are ready to train.</p>
+      <p style="margin:0;color:var(--ink-2);font-size:15px">A 1M-parameter test reached validation loss 1.17 and wrote clean openings, but barely used its encoder: a full encoder improved its loss by only 0.005.</p>
+    </div>
+    <div class="card">
+      <h3>Next steps</h3>
+      <ul class="plain">
+        <li><b>Word-piece tokens (BPE)</b>, the best bet for moving meaning past 2 out of 5.</li>
+        <li><b>Sampling settings</b> (top-k, repetition penalty) on the best model, no training needed.</li>
+        <li><b>fp16 training</b> as its own experiment, for faster runs.</li>
+        <li><b>Full encoder-decoder runs</b>, then TinyStories-Instruct.</li>
+        <li><b>A second seed and a judge re-check</b>, to measure noise.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  Gecko · built following Andrej Karpathy's <i>Neural Networks: Zero to Hero</i> · data: TinyStories (Eldan and Li, 2023) ·
+  <a href="https://github.com/focuzd/gecko/blob/main/benchmarks/result.md">raw benchmark results</a>
+</footer>
+
+<div id="tip" role="tooltip"></div>
+
+<script>
+const REPO = "https://github.com/focuzd/gecko";
+
+const MILESTONES = [
+  { date: "Oct 11-12", title: "First models", body: "A bigram and a GPT trained in notebooks on 5M characters of TinyStories." },
+  { date: "Oct 15", commit: "8776bdf", title: "A proper codebase", body: "Notebooks rewritten as Python scripts in src/, with separate train, evaluate and sample scripts. Git repository created." },
+  { date: "Oct 16", commit: "ccd51db", title: "MLP model", body: "A Bengio-style MLP with a 32-character context, the step between bigram and GPT. Validation loss 2.29 → 1.13." },
+  { date: "Oct 18", commit: "eaf0a7a", title: "The blind benchmark", body: "AI-judged benchmark with real and random controls. Gemini's free tier ran out, so judging moved to Claude Haiku.", score: "Bigram 0 · MLP 18 · GPT 45" },
+  { date: "Oct 18", commit: "a370fe0", title: "GPU training on Kaggle", body: "A notebook that clones the repo and trains on a free T4 GPU." },
+  { date: "Oct 18", commit: "d9e9662", title: "10× more data", body: "Same GPT trained on 50M characters instead of 5M. No real change.", score: "45 → 46" },
+  { date: "Oct 24", commit: "54eeab2", title: "Ready to scale", body: "Context-length and 19.3M configs, run names that record size, context and data, faster fused attention, resumable training." },
+  { date: "Oct 25", commit: "1c9fe30", title: "Context 256 → 512", body: "Lower loss but worse stories. Investigation traced it to half as many sequences per step.", score: "46 → 40" },
+  { date: "Oct 25", commit: "afcb9db", title: "Doubling the parameters", body: "19.3M parameters at the 512 context recovered most of the drop.", score: "40 → 44" },
+  { date: "Oct 25", commit: "133f8ff", title: "Batch 32 → 64", body: "The clearest result of the project (p = 0.002). Benchmark stories now generated on Kaggle.", score: "40 → 51" },
+  { date: "Oct 26", commit: "26d7e2b", title: "Best model", body: "19.3M parameters, batch 64, 10,000 steps. Lowest loss by far, small gain in score, more copying.", score: "53" },
+  { date: "Nov 15", commit: "948cc95", title: "Encoder-decoder", body: "A small encoder-decoder with three layer splits and new loss diagnostics, tested at small scale." },
+  { date: "Next", future: true, title: "Word-piece tokens and full encoder-decoder runs", body: "BPE tokenizer, sampling settings, fp16, and the three encoder-decoder runs on Kaggle." },
+];
+
+const MODELS = [
+  { id: "bigram", name: "Bigram", run: "bigram-7k-c1-d5m-b32", score: 0, loss: 2.29, params: "7K", ctx: 1, batch: 32, steps: "3,000", data: "5M", copy: 0.00 },
+  { id: "mlp", name: "MLP", run: "mlp-439k-c32-d5m-b64", score: 18, loss: 1.13, params: "0.44M", ctx: 32, batch: 64, steps: "10,000", data: "5M", copy: 1.29 },
+  { id: "gpt5", name: "First GPT", run: "gpt-10.8m-c256-d5m-b64", score: 45, loss: null, params: "10.8M", ctx: 256, batch: 64, steps: "5,000", data: "5M", copy: 8.00 },
+  { id: "A", name: "A · GPT, 50M data", run: "gpt-10.8m-c256-d50m-b64", score: 46, loss: 0.661, params: "10.8M", ctx: 256, batch: 64, steps: "5,000", data: "50M", copy: 7.79 },
+  { id: "B", name: "B · context 512", run: "gpt-10.9m-c512-d50m-b32", score: 40, loss: 0.638, params: "10.9M", ctx: 512, batch: 32, steps: "5,000", data: "50M", copy: 7.29 },
+  { id: "C", name: "C · 19.3M params", run: "gpt-19.3m-c512-d50m-b32", score: 44, loss: 0.613, params: "19.3M", ctx: 512, batch: 32, steps: "5,000", data: "50M", copy: 9.79 },
+  { id: "D", name: "D · batch 64", run: "gpt-10.9m-c512-d50m-b64", score: 51, loss: 0.588, params: "10.9M", ctx: 512, batch: 64, steps: "5,000", data: "50M", copy: 7.92 },
+  { id: "E", name: "E · best model", run: "gpt-19.3m-c512-d50m-b64", score: 53, loss: 0.516, params: "19.3M", ctx: 512, batch: 64, steps: "10,000", data: "50M", copy: 10.58 },
+];
+
+const EXPERIMENTS = [
+  { factor: "Data size", q: "Does 10× more text help?", from: 45, to: 46, verdict: "none",
+    text: "5M → 50M characters. The model had already seen its 5M characters about 18 times, so data wasn't the limit.",
+    held: "Held fixed: model, 5,000 steps, batch 64." },
+  { factor: "Context length", q: "Does seeing 512 characters instead of 256 help?", from: 46, to: 40, verdict: "hint",
+    text: "Loss fell (0.661 → 0.638) but stories got worse. Cause: half as many sequences per step, so less practice on the short contexts stories are written in.",
+    held: "Held fixed: characters per step. A won 19 of 24 pairs, p ≈ 0.06." },
+  { factor: "Model size", q: "Does nearly doubling the parameters help?", from: 40, to: 44, verdict: "hint",
+    text: "10.9M → 19.3M. Better on every criterion, but still not above the 256-context baseline.",
+    held: "Held fixed: context 512, batch 32, 5,000 steps. 15 of 24 pairs, p = 0.08." },
+  { factor: "Batch size", q: "Do more sequences per step help?", from: 40, to: 51, verdict: "real",
+    text: "Batch 32 → 64. The longer context was never the problem; the small batch was. Also saw twice the text.",
+    held: "Held fixed: model, context 512, 5,000 steps. p = 0.002." },
+  { factor: "Training longer", q: "How far can more compute go?", from: 51, to: 53, verdict: "none",
+    text: "19.3M, batch 64, 10,000 steps: about 4× the compute. Loss 0.588 → 0.516, but only +2 points. Spelling and grammar improved, meaning didn't.",
+    held: "Not one-factor: size and steps both changed. 12 of 24 pairs, p = 0.39." },
+];
+
+const CRITERIA = ["Spelling", "Grammar", "Consistency", "Prompt following", "Structure", "Meaning", "Style"];
+const HEAT = [
+  { name: "Bigram", v: [1.00, 1.00, 1.00, 1.92, 1.00, 1.00, 1.08] },
+  { name: "MLP", v: [1.58, 1.79, 1.62, 2.12, 1.75, 1.12, 2.00] },
+  { name: "First GPT", v: [4.04, 2.62, 2.08, 2.67, 2.04, 1.83, 3.29] },
+  { name: "D · batch 64", v: [4.04, 2.88, 2.17, 3.12, 2.17, 2.00, 3.50] },
+  { name: "E · best model", v: [4.25, 2.96, 2.08, 3.12, 2.38, 2.04, 3.46] },
+  { name: "Real TinyStories", v: [5.00, 4.42, 4.58, 4.75, 3.50, 3.75, 4.25] },
+];
+
+const STORIES = [
+  { name: "Bigram", score: 0, text: "Once upon a timey wanthe er sackeaplithe we, s imamoo gintlie athey okewas heshimane ng pawan venthe ham. ig g Tho akimay.", note: "Common letter pairs, almost no real words." },
+  { name: "MLP", score: 18, text: "Once upon a time, there was a big, red and wanted to lit home, in a big party. He wanted the window and want back to help her pice. Tim was so happy hole and says.", note: "Real words and names; sentences don't connect." },
+  { name: "First GPT", score: 45, text: "Once upon a time, there was an elderly little bird named Blue. Blue loved to sing around her room. ... Blue said, \"Thank you, Blue!\" Blue and Blue played with the bush all day long.", note: "Fluent and grammatical, but who is who gets lost." },
+  { name: "Best GPT", score: 53, text: "Once upon a time, in a small town, there was a little girl named Lily. She had a big garden with many plants. Lily loved her garden very much. She planted to win the plants and touch them.", note: "Clean spelling and grammar; meaning still wobbles." },
+];
+
+/* ---------- tooltip ---------- */
+const tip = document.getElementById("tip");
+function showTip(html, x, y) {
+  tip.innerHTML = html; tip.style.opacity = 1;
+  const r = tip.getBoundingClientRect();
+  let left = x + 14, top = y + 14;
+  if (left + r.width > window.innerWidth - 8) left = x - r.width - 14;
+  if (top + r.height > window.innerHeight - 8) top = y - r.height - 14;
+  tip.style.left = Math.max(8, left) + "px"; tip.style.top = Math.max(8, top) + "px";
+}
+function hideTip() { tip.style.opacity = 0; }
+function bindTip(el, html) {
+  el.tabIndex = 0;
+  el.setAttribute("aria-label", html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim());
+  el.addEventListener("mousemove", e => showTip(html, e.clientX, e.clientY));
+  el.addEventListener("mouseleave", hideTip);
+  el.addEventListener("focus", () => { const r = el.getBoundingClientRect(); showTip(html, r.right, r.top); });
+  el.addEventListener("blur", hideTip);
+}
+const row = (k, v) => `<div class="row"><span>${k}</span><span>${v}</span></div>`;
+const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+
+/* ---------- timeline ---------- */
+document.getElementById("timeline").innerHTML = MILESTONES.map(m => `
+  <li class="${m.future ? "future" : ""}">
+    <div class="tl-date">${m.date}${m.commit ? `<a class="commit" href="${REPO}/commit/${m.commit}">${m.commit}</a>` : ""}</div>
+    <div class="tl-title">${m.title}</div>
+    <div class="tl-body">${m.body}${m.score ? ` <span class="score">Score: ${m.score}</span>` : ""}</div>
+  </li>`).join("");
+
+/* ---------- horizontal bar chart (HTML) ---------- */
+function barChart(barsId, axisId, items, max, ticks, fmt, tipFor, ref) {
+  const bars = document.getElementById(barsId);
+  bars.innerHTML = "";
+  for (const it of items) {
+    const label = document.createElement("div");
+    label.className = "bar-label";
+    label.innerHTML = `${it.name}<small>${it.run}</small>`;
+    const track = document.createElement("div");
+    track.className = "bar-track";
+    track.innerHTML = `<div class="base"></div>` + ticks.filter(t => t > 0).map(t => `<div class="gridl" style="left:${t / max * 100}%"></div>`).join("")
+      + (ref ? `<div class="refline" style="left:${ref / max * 100}%"></div>` : "");
+    const pct = it.value / max * 100;
+    const bar = document.createElement("div");
+    bar.className = "bar";
+    bar.style.width = `max(${pct}%, ${it.value > 0 ? 2 : 0}px)`;
+    const val = document.createElement("div");
+    val.className = "bar-val";
+    val.textContent = fmt(it.value);
+    val.style.left = `calc(${pct}% + 6px)`;
+    track.append(bar, val);
+    bindTip(bar.offsetParent ? bar : bar, tipFor(it));
+    if (it.value === 0) bindTip(track, tipFor(it));
+    bars.append(label, track);
+  }
+  document.getElementById(axisId).innerHTML = ticks.map(t => `<span style="left:${t / max * 100}%">${t}</span>`).join("");
+}
+
+barChart("scoreBars", "scoreAxis", MODELS.map(m => ({ ...m, value: m.score })), 100, [0, 25, 50, 75, 100], v => v,
+  m => `<b>${m.name}</b>${row("Score", m.score)}${row("Validation loss", m.loss == null ? "≈0.68 (5M set)" : m.loss + (m.data === "5M" ? " (5M set)" : ""))}${row("Parameters", m.params)}${row("Context", m.ctx)}${row("Batch", m.batch)}${row("Steps", m.steps)}${row("Data", m.data + " chars")}`);
+
+barChart("copyBars", "copyAxis", MODELS.map(m => ({ ...m, value: m.copy })), 12, [0, 3, 6, 9, 12], v => v.toFixed(2),
+  m => `<b>${m.name}</b>${row("Longest copied span", m.copy.toFixed(2) + " words")}${row("Real stories", "8.75 words")}${row("Steps", m.steps)}${row("Data", m.data + " chars")}`, 8.75);
+
+function table(el, head, rows) {
+  document.getElementById(el).innerHTML = `<table class="tbl"><thead><tr>${head.map((h, i) => `<th class="${i ? "num" : ""}">${h}</th>`).join("")}</tr></thead><tbody>${rows.map(r => `<tr>${r.map((c, i) => `<td class="${i ? "num" : ""}">${c}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+}
+table("scoreTable", ["Model", "Parameters", "Context", "Batch", "Steps", "Data", "Val loss", "Score"],
+  MODELS.map(m => [`${m.name}<br><small style="color:var(--muted)">${m.run}</small>`, m.params, m.ctx, m.batch, m.steps, m.data, m.loss == null ? "≈0.68" : m.loss, m.score]));
+table("copyTable", ["Model", "Longest copied span (words)"],
+  [...MODELS.map(m => [m.name, m.copy.toFixed(2)]), ["Real TinyStories", "8.75"]]);
+
+/* ---------- experiments ---------- */
+const VERDICT = {
+  real: { label: "Real difference", color: "var(--good)", icon: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="var(--good)"/><path d="M4.5 8.2l2.3 2.3 4.7-4.8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' },
+  hint: { label: "A hint, not proven", color: "var(--warn)", icon: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="var(--warn)"/><path d="M8 4.5v4.2" stroke="#0b0b0b" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="11.3" r="1" fill="#0b0b0b"/></svg>' },
+  none: { label: "No real difference", color: "var(--none)", icon: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="var(--none)"/><path d="M5 8h6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>' },
+};
+document.getElementById("exps").innerHTML = EXPERIMENTS.map(e => {
+  const v = VERDICT[e.verdict];
+  return `<div class="card exp">
+    <h3>${e.factor}</h3>
+    <p class="q">${e.q}</p>
+    <div class="delta"><span class="from">${e.from}</span><span class="arrow">→</span><span class="to">${e.to}</span><span class="unit">score</span></div>
+    <p><span class="verdict">${v.icon}${v.label}</span></p>
+    <p>${e.text}</p>
+    <p class="held">${e.held}</p>
+  </div>`;
+}).join("");
+
+/* ---------- scatter (SVG, drawn at real pixel width) ---------- */
+function drawScatter() {
+  const host = document.getElementById("scatter");
+  const pts = MODELS.filter(m => m.data === "50M");
+  const W = Math.max(280, host.clientWidth), H = W < 480 ? 280 : 340;
+  const m = { l: 40, r: 20, t: 16, b: 44 };
+  const x0 = 0.50, x1 = 0.68, y0 = 35, y1 = 55;
+  const X = v => m.l + (v - x0) / (x1 - x0) * (W - m.l - m.r);
+  const Y = v => H - m.b - (v - y0) / (y1 - y0) * (H - m.t - m.b);
+  const xt = [0.50, 0.55, 0.60, 0.65], yt = [35, 40, 45, 50, 55];
+  let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`;
+  for (const t of yt) s += `<line x1="${m.l}" x2="${W - m.r}" y1="${Y(t)}" y2="${Y(t)}" stroke="var(--grid)" stroke-width="1"/><text class="tick" x="${m.l - 8}" y="${Y(t) + 4}" text-anchor="end">${t}</text>`;
+  for (const t of xt) s += `<text class="tick" x="${X(t)}" y="${H - m.b + 18}" text-anchor="middle">${t.toFixed(2)}</text>`;
+  s += `<line x1="${m.l}" x2="${W - m.r}" y1="${H - m.b}" y2="${H - m.b}" stroke="var(--axis)" stroke-width="1"/>`;
+  s += `<text x="${(m.l + W - m.r) / 2}" y="${H - 6}" text-anchor="middle">Validation loss (lower is better)</text>`;
+  s += `<text x="${m.l}" y="${m.t - 4}" text-anchor="start">Score</text>`;
+  for (const p of pts) {
+    const anchorRight = X(p.loss) > W - 120;
+    s += `<g class="pt" data-id="${p.id}"><circle cx="${X(p.loss)}" cy="${Y(p.score)}" r="14" fill="transparent"/>
+      <circle cx="${X(p.loss)}" cy="${Y(p.score)}" r="6" fill="var(--series)" stroke="var(--surface)" stroke-width="2"/>
+      <text class="pt-label" x="${X(p.loss) + (anchorRight ? -12 : 12)}" y="${Y(p.score) + 4}" text-anchor="${anchorRight ? "end" : "start"}">${p.id} · ${p.score}</text></g>`;
+  }
+  s += `</svg>`;
+  host.innerHTML = s;
+  host.querySelectorAll(".pt").forEach(g => {
+    const p = pts.find(q => q.id === g.dataset.id);
+    bindTip(g, `<b>${p.name}</b>${row("Validation loss", p.loss)}${row("Score", p.score)}${row("Context", p.ctx)}${row("Batch", p.batch)}${row("Parameters", p.params)}${row("Steps", p.steps)}`);
+  });
+}
+drawScatter();
+let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(drawScatter, 120); });
+table("lossTable", ["Model", "Validation loss", "Score"], MODELS.filter(m => m.data === "50M").map(m => [`${m.name}<br><small style="color:var(--muted)">${m.run}</small>`, m.loss, m.score]));
+
+/* ---------- heatmap table ---------- */
+const step = v => Math.max(0, Math.min(6, Math.round((v - 1) / 4 * 6)));
+document.getElementById("heat").innerHTML =
+  `<thead><tr><th></th>${CRITERIA.map(c => `<th scope="col">${c}</th>`).join("")}</tr></thead><tbody>` +
+  HEAT.map(r => `<tr><th class="row" scope="row">${r.name}</th>${r.v.map((v, i) => {
+    const k = step(v);
+    return `<td style="background:var(--seq-${k});color:var(--seq-ink-${k})">${v.toFixed(2)}</td>`;
+  }).join("")}</tr>`).join("") + `</tbody>`;
+document.querySelectorAll("#heat tbody tr").forEach((tr, ri) => {
+  tr.querySelectorAll("td").forEach((td, ci) => {
+    bindTip(td, `<b>${HEAT[ri].name}</b>${row(CRITERIA[ci], HEAT[ri].v[ci].toFixed(2) + " / 5")}`);
+  });
+});
+document.getElementById("rampKey").innerHTML = [0, 1, 2, 3, 4, 5, 6].map(k => `<span style="background:var(--seq-${k})"></span>`).join("");
+
+/* ---------- stories ---------- */
+document.getElementById("storyCards").innerHTML = STORIES.map(s => `
+  <div class="card story">
+    <div class="who"><strong>${s.name}</strong><span>${s.score}</span></div>
+    <blockquote>${esc(s.text)}</blockquote>
+    <div class="meta">${s.note}</div>
+  </div>`).join("");
+</script>
+</body>
+</html>
